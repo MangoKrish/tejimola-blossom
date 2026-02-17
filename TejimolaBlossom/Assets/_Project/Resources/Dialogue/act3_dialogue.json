@@ -1,0 +1,250 @@
+{
+  "conversations": [
+    {
+      "id": "act3_dom_arrival",
+      "act": "Act3_DomArrival",
+      "entries": [
+        {
+          "id": "act3_001",
+          "speaker": "Narrator",
+          "text": "Twenty years later. A wandering drummer arrives at the ruins of a once-prosperous estate.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "act3_002",
+          "choices": []
+        },
+        {
+          "id": "act3_002",
+          "speaker": "Dom",
+          "text": "This place... something draws me here. The drum feels heavier. There are spirits in these walls.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "act3_003",
+          "choices": []
+        },
+        {
+          "id": "act3_003",
+          "speaker": "Narrator",
+          "text": "Use the Spirit Pulse [SPACE] to reveal hidden echoes of the past. The drum connects to what lies beneath.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act3_first_encounter",
+      "act": "Act3_DomArrival",
+      "entries": [
+        {
+          "id": "encounter_001",
+          "speaker": "Narrator",
+          "text": "A sound... like a child weeping. The spirit pulse reveals a shimmering figure near the nahor tree.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "encounter_002",
+          "choices": []
+        },
+        {
+          "id": "encounter_002",
+          "speaker": "Tejimola Spirit",
+          "text": "Help me... please...",
+          "textAssamese": "মোক সহায় কৰক... অনুগ্ৰহ কৰি...",
+          "emotion": "sad",
+          "next": "encounter_003",
+          "choices": []
+        },
+        {
+          "id": "encounter_003",
+          "speaker": "Dom",
+          "text": "[Drum response - no words, but understanding]",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "encounter_004",
+          "choices": []
+        },
+        {
+          "id": "encounter_004",
+          "speaker": "Narrator",
+          "text": "The spirit is trapped, its memories scattered like broken pottery. To free her, you must recover what was lost.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act3_puzzle_well",
+      "act": "Act3_DualTimeline",
+      "entries": [
+        {
+          "id": "well_001",
+          "speaker": "Narrator",
+          "text": "A dry well stands in the courtyard. Once, it held a secret...",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "well_002",
+          "choices": []
+        },
+        {
+          "id": "well_002",
+          "speaker": "Dom",
+          "text": "The spirit pulse shows something... a memory hidden below. Tejimola's father showed her a secret spot down here.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "well_003",
+          "choices": []
+        },
+        {
+          "id": "well_003",
+          "speaker": "Narrator",
+          "text": "[Split screen activates - Past: Tejimola and father at the well / Present: Dom examining the dry well]",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act3_puzzle_hairpin",
+      "act": "Act3_DualTimeline",
+      "entries": [
+        {
+          "id": "hairpin_001",
+          "speaker": "Narrator",
+          "text": "On the floorboards of a ruined room, something glints. A golden hairpin, tarnished by time.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "hairpin_002",
+          "choices": []
+        },
+        {
+          "id": "hairpin_002",
+          "speaker": "Dom",
+          "text": "This belonged to her. I can feel the love in it. A father's gift...",
+          "textAssamese": "",
+          "emotion": "sad",
+          "next": "hairpin_003",
+          "choices": []
+        },
+        {
+          "id": "hairpin_003",
+          "speaker": "Narrator",
+          "text": "The spirit grows stronger with each memory recovered. The nahor tree seems to respond...",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act3_puzzle_lullaby",
+      "act": "Act3_DualTimeline",
+      "entries": [
+        {
+          "id": "lullaby_001",
+          "speaker": "Narrator",
+          "text": "In the child's room, echoes of a lullaby. The walls remember the melody.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "lullaby_002",
+          "choices": []
+        },
+        {
+          "id": "lullaby_002",
+          "speaker": "Dom",
+          "text": "A song... I can play it on the drum. Let me match the melody the walls remember.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act3_puzzle_boat",
+      "act": "Act3_DualTimeline",
+      "entries": [
+        {
+          "id": "boat_001",
+          "speaker": "Narrator",
+          "text": "Near the riverside, the rotting hull of a small boat. Once it carried a family on golden afternoons.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "boat_002",
+          "choices": []
+        },
+        {
+          "id": "boat_002",
+          "speaker": "Dom",
+          "text": "The river still carries her voice. Let me listen...",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act3_puzzle_seed",
+      "act": "Act3_DualTimeline",
+      "entries": [
+        {
+          "id": "seed_001",
+          "speaker": "Narrator",
+          "text": "Beneath the great nahor tree, buried among its roots, a seed case holds the final memory.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "seed_002",
+          "choices": []
+        },
+        {
+          "id": "seed_002",
+          "speaker": "Dom",
+          "text": "This is where she rests. This is where it all began... and where it must end.",
+          "textAssamese": "",
+          "emotion": "sad",
+          "next": "seed_003",
+          "choices": []
+        },
+        {
+          "id": "seed_003",
+          "speaker": "Narrator",
+          "text": "All five memories recovered. The nahor tree pulses with light. But a darkness stirs...",
+          "textAssamese": "",
+          "emotion": "fearful",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act3_all_puzzles_solved",
+      "act": "Act3_DualTimeline",
+      "entries": [
+        {
+          "id": "solved_001",
+          "speaker": "Tejimola Spirit",
+          "text": "I remember now... I remember everything. But she is still here. The cruelty lives on.",
+          "textAssamese": "মই এতিয়া মনত পেলাইছোঁ... মই সকলো মনত পেলাইছোঁ।",
+          "emotion": "sad",
+          "next": "solved_002",
+          "choices": []
+        },
+        {
+          "id": "solved_002",
+          "speaker": "Dom",
+          "text": "Then we face her together. My drum and your spirit. We end this.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    }
+  ]
+}

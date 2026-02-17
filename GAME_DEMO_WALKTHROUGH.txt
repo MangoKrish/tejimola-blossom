@@ -1,0 +1,501 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║     TEJIMOLA: THE BLOSSOM FROM CLAY — Interactive Demo Walkthrough         ║
+║                                                                              ║
+║     A 90-minute narrative adventure game based on Assamese folktales        ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+MAIN MENU SCREEN
+════════════════════════════════════════════════════════════════════════════════
+
+                        ┌─────────────────────────────────┐
+                        │                                 │
+                        │         🌳 NAHOR TREE 🌳        │
+                        │    (Nahor tree in full bloom)   │
+                        │    White petals drifting...     │
+                        │    Gold ornamental borders      │
+                        │                                 │
+                        ├─────────────────────────────────┤
+                        │                                 │
+                        │    TEJIMOLA: THE BLOSSOM        │
+                        │         FROM CLAY               │
+                        │                                 │
+                        │  [NEW GAME]                     │
+                        │  [CONTINUE]                     │
+                        │  [SETTINGS]                     │
+                        │  [EXTRAS]                       │
+                        │  [QUIT]                         │
+                        │                                 │
+                        └─────────────────────────────────┘
+
+                        CONTROLS: Arrow Keys / Mouse
+                        AUDIO: Procedurally generated Indian raga music
+
+Player clicks: [NEW GAME]
+
+
+ACT I: THE HAPPY HOME (15 minutes)
+════════════════════════════════════════════════════════════════════════════════
+
+SCENE: Prosperous Merchant's Household near Brahmaputra River
+TIME: Circa 1880s-1890s
+
+                    ☀️ (Golden sunlight pours down)
+
+        ⛅    ☁️                              ⛅
+
+    🌳🌳🌳           [HOUSE]            🌳🌳🌳 (Nahor tree center)
+ 🌿🌿🌿🌿🌿   [WOODEN DOOR]    🌿🌿🌿🌿🌿
+     [Garden]     [COURTYARD]      [Garden]
+      🌸🌸         (Player here)      🌸🌸
+     🌺🌺                            🌺🌺
+
+
+DIALOGUE SEQUENCE:
+────────────────────────────────────────────────────────────────────────────────
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ [Tejimola Portrait] 👧 🌟                                                    │
+│                                                                              │
+│ TEJIMOLA: "Baba! Look how high I can jump!"                                 │
+│ (Assamese: "বাবা! চোৱা মই কিমান ওখকৈ জপিয়াব পাৰোঁ!")                      │
+│                                                                              │
+│ [NARRATOR]: "In a prosperous household near the mighty Brahmaputra          │
+│ River, a young girl plays. Her father watches with love..."                 │
+│                                                                              │
+│ [FATHER]: "Be careful, my little flower! Come, let me show you              │
+│ something in the garden."                                                    │
+│                                                                              │
+│ [Scene - Father leads Tejimola to Nahor tree]                               │
+│                                                                              │
+│ [FATHER]: "This flower will always bloom for you. I am here for             │
+│ you, always." [Gives golden hairpin]                                        │
+│                                                                              │
+│ TEJIMOLA: "What a beautiful flower! I will keep it forever, Baba!"         │
+│                                                                              │
+│ [Golden light fades. Colors begin to desaturate...]                         │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+EXPLORATION PHASE:
+Walk around home, examine:
+  - Kitchen (smell of wonderful pitha bread)
+  - Father's room (merchant's maps and ledgers)
+  - Tejimola's bedroom (toys scattered, safe place)
+  - Garden (the nahor tree blooming white flowers)
+
+GAMEPLAY ELEMENTS:
+  - Press [E] to interact with objects
+  - Each object triggers dialogue about memories
+  - Screen gradually shows warm gold tones
+  - Music: Traditional Indian raga (Bilawal - happy, open)
+
+
+ACT I: THE FUNERAL (10 minutes)
+════════════════════════════════════════════════════════════════════════════════
+
+SCENE: Colors desaturate. Sky becomes gray. Wind sounds.
+
+[Funeral gathering - somber scene]
+
+DIALOGUE:
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ [Muted colors, gray palette]                                                │
+│                                                                              │
+│ VILLAGE ELDER: "He was a good man. The river carries his soul now.         │
+│ We must believe in what comes after."                                       │
+│                                                                              │
+│ TEJIMOLA: "Baba... why did you leave? Why did you go?"                     │
+│ (Assamese: "বাবা... তুমি কিয় গুচি গ'লা? তুমি কিয় গ'লা?")                 │
+│                                                                              │
+│ [CHOICE appears:]                                                           │
+│   [A] "I miss you so much..."                                               │
+│   [B] "I'll be strong, Baba. I promise."                                    │
+│                                                                              │
+│ [Player's choice affects how story progresses]                              │
+│                                                                              │
+│ NARRATOR: "And so, the merchant's household changed forever.                │
+│ When the father remarried... Ranima arrived."                               │
+│                                                                              │
+│ RANIMA: "So this is the girl. Don't smile at me like that."                │
+│ "Your father is gone now. You will do as I say."                           │
+│                                                                              │
+│ [The light grows cold. Shadows lengthen...]                                 │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+
+ACT II: THE DESCENT (20 minutes)
+════════════════════════════════════════════════════════════════════════════════
+
+SCENE: Same household, but DESATURATED. Shadows everywhere. Cold palette.
+
+STEALTH PHASE (First 10 minutes):
+────────────────────────────────────────────────────────────────────────────────
+
+                    DESATURATED HOUSEHOLD
+
+        🏠(Ranima's room) 🚪(Hallway) 🏠(Kitchen)
+        
+           [Furniture] ← HIDE HERE
+           
+    [Tejimola] ← Player controlled
+    
+    👁️ [Ranima] ← AVOID HER
+    
+    Patrol path: ──→ [searching] ←── [caught 0/5]
+
+MECHANICS:
+  - STEALTH: Press [C] to crouch and move quietly
+  - HIDING: Press [Space] near furniture to hide
+  - DETECTION: If Ranima sees you → Caught count increases (0/5)
+  - When caught 5 times → Caught scene triggers
+
+DIALOGUE:
+
+  RANIMA: "Where are you? Get to work! The rice must be husked!"
+  
+  TEJIMOLA (whispering): "Please... I need to rest..."
+  
+  [If caught]: RANIMA: "There you are! Hiding again? You never do 
+              as you're told!"
+
+MUSIC: Bhairavi raga (sad, tense) - BPM gets faster
+
+
+RHYTHM MINIGAME - DHEKI SEQUENCE (Next 10 minutes):
+────────────────────────────────────────────────────────────────────────────────
+
+SCENE: Rice processing area. Dheki (wooden rice husker) awaits.
+
+                    🥁 DHEKI SEQUENCE 🥁
+                    
+        ╔════════════════════════════════════════╗
+        ║      TEMPO: 90 BPM → 150 BPM          ║
+        ║      HIT WINDOW: 0.25s (narrowing)     ║
+        ║      EXHAUSTION: 100%                  ║
+        ║                                        ║
+        ║   Press [Q] and [E] to match beat!     ║
+        ║                                        ║
+        ║   Visual indicators:                   ║
+        ║   ◯ ◯ ◯ ◯  ← Incoming beats           ║
+        ║        ▼   ← Hit zone                  ║
+        ║       HIT!                             ║
+        ║                                        ║
+        ║   [PERFECT!] = -1% exhaustion          ║
+        ║   [GOOD]     = -1% exhaustion          ║
+        ║   [MISS]     = -0% exhaustion          ║
+        ║                                        ║
+        ║   ████████░░ Exhaustion Bar            ║
+        ║   Combo: x15                           ║
+        ║                                        ║
+        ║   BEAT 10: [VISION TRIGGERED]          ║
+        ║   "I see... Baba's boat on the river!" ║
+        ║   Which response resonates?            ║
+        ║   [A] The boat     [B] The river       ║
+        ║   [C] The sunshine                     ║
+        ║                                        ║
+        ║   Player's choice affects Act III      ║
+        ║   and which memories recover first     ║
+        ║                                        ║
+        ║   BEAT 20: Tempo increases 120 BPM     ║
+        ║   Hit window gets narrower             ║
+        ║                                        ║
+        ║   BEAT 30: 150 BPM - INTENSE           ║
+        ║   Focus required - vision blurs        ║
+        ║                                        ║
+        ║   ...exhaustion takes hold...          ║
+        ║   ...Tejimola collapses...             ║
+        ║                                        ║
+        ║   ACT II ENDS                          ║
+        ╚════════════════════════════════════════╝
+
+MUSIC: "Act2_Dheki" - Traditional dhol and pepa (buffalo horn) sounds
+        with procedural beats that increase in tempo
+
+
+ACT III: SPIRIT AWAKENS (25 minutes)
+════════════════════════════════════════════════════════════════════════════════
+
+[Timeline shifts 20 years into the future]
+[Player switches to DOM - the spirit-sensitive drummer]
+
+SCENE: Ruined household overgrown with vines. Nahor tree still stands.
+
+                    🌙 DARK ETHEREAL ATMOSPHERE 🌙
+
+        [Ruins of house]    🌳 [Nahor Tree]    [Overgrown garden]
+        
+        Vines creep        Branches reach      Flowers wild
+        Darkness lingers   toward sky          Growing free
+        
+    [DOM] ← New character/perspective
+
+SPIRIT DISCOVERY:
+
+    [Softly crying voice]
+    
+    TEJIMOLA SPIRIT: "Help me... please..."
+    (Ethereal, translucent figure appears near tree)
+    
+    DOM: "[Drum response - no words, but understanding]"
+    
+    NARRATOR: "A spirit trapped. Memories scattered like broken pottery.
+    To free her, you must recover what was lost."
+
+CORE MECHANIC: SPIRIT PULSE
+
+    Press [SPACE] to activate Spirit Pulse
+    
+    ◉ ◉ ◉ ◉ ← Expanding rings reveal hidden objects
+    
+    Radius: 5 meters
+    Cooldown: 3 seconds
+    
+    When activated:
+      - Hidden memories shimmer into view
+      - Spirit Pulse ready! icon reappears when cooldown finishes
+      - Audio: whooshing spirit sound
+
+
+MEMORY RECOVERY - 5 SPLIT-SCREEN PUZZLES:
+────────────────────────────────────────────────────────────────────────────────
+
+        PAST (left side - misty)    |    PRESENT (right side)
+        
+        [Sepia toned]               |    [Blue/purple tones]
+        Tejimola age 10             |    Dom exploring ruins
+        With her father             |    Finding clues
+        
+        ┌─────────────────┬─────────────────┐
+        │ PAST            │ PRESENT         │
+        │                 │                 │
+        │ Father shows    │ Dom finds       │
+        │ her well        │ dry well        │
+        │ "Secret spot"   │ Golden shimmer  │
+        │                 │ appears         │
+        │ [PUZZLE]        │ Link the memory │
+        │ Examine         │ [Solved!]       │
+        │ objects from    │                 │
+        │ both timelines  │ Environment     │
+        │                 │ transforms      │
+        │                 │ Well fills with │
+        │ [MEMORY 1/5]    │ spirit water    │
+        └─────────────────┴─────────────────┘
+
+[Repeat 4 more times with different locations and objects]
+
+MEMORY 2: Hairpin on floorboards
+MEMORY 3: Lullaby echoing in child's room  
+MEMORY 4: Boat by the riverside
+MEMORY 5: Nahor tree seed beneath roots
+
+MUSIC: "Act3_DualTimeline" - Ethereal, mysterious, split between 
+        past (gentle lullaby) and present (contemplative drum tones)
+
+After all 5 memories collected:
+
+    TEJIMOLA SPIRIT: "I remember now... I remember everything.
+    But she is still here. The cruelty lives on."
+    
+    DOM: "Then we face her together. My drum and your spirit.
+    We end this."
+    
+    [The nahor tree pulses with light...]
+    [Reality begins to warp...]
+    [The screen inverts and twists...]
+
+
+ACT IV: CONFRONTATION - BOSS FIGHT (15 minutes)
+════════════════════════════════════════════════════════════════════════════════
+
+SCENE: Surreal inverted world. Buildings upside down. Colors twisted.
+       Ranima's corrupted form manifests.
+
+RANIMA CORRUPTED: "You dare disturb what I have buried? 
+                  She is MINE! This house is MINE!"
+
+BOSS FIGHT STRUCTURE:
+────────────────────────────────────────────────────────────────────────────────
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                          PHASE 1: NAVIGATE (5 min)                           │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ╔═════════════════════════════════════════════════════════════════╗        │
+│  ║                                                                 ║        │
+│  ║  [DOM] ←─ Dodge objects                                        ║        │
+│  ║  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ║        │
+│  ║  ░░░░░░[RANIMA CORRUPTED]░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ║        │
+│  ║  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ║        │
+│  ║  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ║        │
+│  ║  ━━━━━━ [Twisting vines obstacle] ━━━━━━                        ║        │
+│  ║  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ║        │
+│  ║                                                                 ║        │
+│  ║  BOSS HEALTH: █████████░░░░░░░░░░░░░░░░░░                     ║        │
+│  ║  Your STATUS:  ██████████████████░░░░░░░░                     ║        │
+│  ║                                                                 ║        │
+│  ║  MUSIC: Intense 140 BPM dhol beats                            ║        │
+│  ║  Vines move - AVOID them!                                     ║        │
+│  ║                                                                 ║        │
+│  ╚═════════════════════════════════════════════════════════════════╝        │
+│                                                                              │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                      PHASE 2: SPIRIT ORBS (5 min)                           │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ◉ ◉ ◉ ← 3 Spirit Orbs collected from memories                            │
+│                                                                              │
+│  [RANIMA] approaches menacingly                                             │
+│                                                                              │
+│  Press [F] to use orb:                                                      │
+│                                                                              │
+│  ◯ [Orb 1 used] → BOSS SLOWS                                              │
+│                    ████████░░░░░░░░░░░░░░░░░ Boss HP                       │
+│                                                                              │
+│  ◯ [Orb 2 used] → BOSS SLOWS MORE                                         │
+│                    ███████░░░░░░░░░░░░░░░░░░ Boss HP                       │
+│                                                                              │
+│  ◯ [Orb 3 used] → BOSS SLOWS SIGNIFICANTLY                                │
+│                    ██████░░░░░░░░░░░░░░░░░░░ Boss HP                       │
+│                                                                              │
+│  STRATEGY: Time your orb use to create opening gaps                         │
+│                                                                              │
+│  TEJIMOLA SPIRIT: "I am not afraid anymore. Not of you."                   │
+│                                                                              │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                    PHASE 3: BARREL PURSUIT (5 min)                          │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  [RANIMA] conjures spiked barrel                                            │
+│                                                                              │
+│                    ⚫ BARREL ROLLING                                         │
+│                    ↓ down toward DOM                                        │
+│                                                                              │
+│  [DOM moves] ← Dodge left/right with arrows                               │
+│                                                                              │
+│  Vines grow from ground:                                                    │
+│         ~~~~                                                                │
+│       ~~~~~~~~  ← Jump over! (Space)                                       │
+│     ~~~~~~~~~~~~                                                            │
+│                                                                              │
+│  [BARREL HITS VINES] → Barrel rolls backward                               │
+│                        into the corruption                                  │
+│                                                                              │
+│  ⚫ ← Barrel hits RANIMA instead                                           │
+│                                                                              │
+│      [RANIMA WEAKENS]                                                       │
+│      ██████░░░░░░░░░░░░░░░░░░░░ HP                                        │
+│                                                                              │
+│  [Continue until boss defeated]                                             │
+│                                                                              │
+│  Nahor tree PULSES WITH LIGHT                                               │
+│  Corruption DISSOLVES                                                       │
+│                                                                              │
+│  RANIMA: "No! This cannot... I..."                                         │
+│  [Fades away into darkness]                                                 │
+│                                                                              │
+│  NARRATOR: "The corruption fades. The twisted world unravels.               │
+│  What remains is silence... and the soft rustle of leaves."                 │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+MUSIC: "Act4_Boss" - Intense, driving, traditional + modern blend
+
+
+EPILOGUE (5 minutes)
+════════════════════════════════════════════════════════════════════════════════
+
+SCENE: Sunrise. The nahor tree in FULL BLOOM.
+
+[Screen transitions to warm golden/rose tones]
+
+        ☀️ Sunrise paints the sky gold and rose
+        
+        [Nahor Tree] - White petals everywhere
+        Thousands of blossoms
+        Gentle breeze
+        
+    [DOM] stands before the tree
+    [TEJIMOLA SPIRIT] - ethereal, peaceful
+
+DIALOGUE:
+
+    ┌────────────────────────────────────────────────────────────────────────┐
+    │ TEJIMOLA SPIRIT: "Thank you... for remembering me.                     │
+    │ For giving me voice."                                                  │
+    │ (Assamese: "ধন্যবাদ... মোক মনত ৰখাৰ বাবে।")                            │
+    │                                                                        │
+    │ DOM: "Your story will be told. Through the drum, through the           │
+    │ flowers, through every bloom of the nahor tree."                      │
+    │                                                                        │
+    │ [Warm breeze blows. Tears fall gently.]                               │
+    │ [Petals drift through the air like snow]                              │
+    │                                                                        │
+    │ TEJIMOLA SPIRIT: "I am free now. And the flowers...                   │
+    │ they will always bloom."                                              │
+    │                                                                        │
+    │ [The spirit gently dissolves into the petals]                         │
+    │ [Dom walks away, carrying her story in his drum]                      │
+    │                                                                        │
+    │ NARRATOR:                                                             │
+    │ "TEJIMOLA: THE BLOSSOM FROM CLAY"                                     │
+    │                                                                        │
+    │ Based on the Assamese folktale.                                       │
+    │ Remembering the stories that must never be forgotten."                │
+    │                                                                        │
+    │ [CREDITS ROLL]                                                        │
+    │ - Inspired by Assamese mythology                                      │
+    │ - Traditional raga-based music throughout                             │
+    │ - Puthi painting art style                                            │
+    │ - Story of remembrance and justice                                    │
+    │                                                                        │
+    └────────────────────────────────────────────────────────────────────────┘
+
+MUSIC: "Epilogue" - Peaceful, triumphant, sun raga (Bhairav) 
+       with ceremonial bells and gentle flute
+
+FINAL SCREEN: "THE END" with nahor petals falling
+
+
+════════════════════════════════════════════════════════════════════════════════
+                            GAME SUMMARY
+════════════════════════════════════════════════════════════════════════════════
+
+TOTAL PLAYTIME:        90 minutes
+                       (Can save/load and play in sessions)
+
+STORY BEATS:           6 major acts/scenes
+GAMEPLAY PHASES:       Exploration, Stealth, Rhythm, Puzzles, Boss Fight
+CHOICES:               Multiple story branching choices
+LANGUAGES:             English + Assamese (with subtitles)
+EMOTIONAL TONE:        Heartwarming → Tragic → Haunting → Hopeful
+
+KEY MECHANICS:
+  ✓ Character switching (Tejimola ↔ Dom)
+  ✓ Stealth avoidance
+  ✓ Rhythm minigame (adaptive difficulty)
+  ✓ Memory puzzles (split-screen)
+  ✓ Boss fight (3 phases)
+  ✓ Save/load system
+  ✓ Accessibility options (subtitles, font sizes, contrast)
+
+THEMES:
+  ✓ Cultural preservation (Assamese folklore)
+  ✓ Justice and remembrance
+  ✓ The power of storytelling
+  ✓ Connection between past and present
+
+SIMILAR GAMES: Gris, Oxenfree, Firewatch, Night in the Woods
+
+
+════════════════════════════════════════════════════════════════════════════════
+                        READY TO PLAY?
+════════════════════════════════════════════════════════════════════════════════
+
+Follow the Windows Setup Guide to get started!
+
+📍 Location: /Users/krishnas/Desktop/game/WINDOWS_SETUP_GUIDE.md

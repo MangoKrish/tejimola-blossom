@@ -1,0 +1,205 @@
+{
+  "conversations": [
+    {
+      "id": "act4_confrontation",
+      "act": "Act4_Confrontation",
+      "entries": [
+        {
+          "id": "act4_001",
+          "speaker": "Narrator",
+          "text": "The world inverts. Reality bends. The corrupted spirit of Ranima manifests in a surreal, twisted version of the household.",
+          "textAssamese": "",
+          "emotion": "fearful",
+          "next": "act4_002",
+          "choices": []
+        },
+        {
+          "id": "act4_002",
+          "speaker": "Ranima Corrupted",
+          "text": "You dare disturb what I have buried? She is MINE! This house is MINE!",
+          "textAssamese": "",
+          "emotion": "angry",
+          "next": "act4_003",
+          "choices": []
+        },
+        {
+          "id": "act4_003",
+          "speaker": "Dom",
+          "text": "No! The truth will not stay buried. The earth itself rejects your cruelty.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "act4_004",
+          "choices": []
+        },
+        {
+          "id": "act4_004",
+          "speaker": "Narrator",
+          "text": "Navigate the twisted landscape. Avoid Ranima's corrupted attacks. Use the spirit orbs to weaken her hold.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act4_phase2",
+      "act": "Act4_Confrontation",
+      "entries": [
+        {
+          "id": "phase2_001",
+          "speaker": "Narrator",
+          "text": "The spirit orbs collected from Tejimola's memories burn with truth. Use them [F] to slow the corruption.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "phase2_002",
+          "choices": []
+        },
+        {
+          "id": "phase2_002",
+          "speaker": "Tejimola Spirit",
+          "text": "I am not afraid anymore. Not of you. Not of the darkness.",
+          "textAssamese": "মই আৰু ভয় নকৰোঁ। তোমাক নহয়। আন্ধাৰক নহয়।",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act4_phase3",
+      "act": "Act4_Confrontation",
+      "entries": [
+        {
+          "id": "phase3_001",
+          "speaker": "Narrator",
+          "text": "In desperation, the corruption conjures the spiked barrel - the very instrument of cruelty. But the jungle itself rises against it.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "phase3_002",
+          "choices": []
+        },
+        {
+          "id": "phase3_002",
+          "speaker": "Narrator",
+          "text": "Dodge the barrels! The vines and roots of the nahor tree will turn them back against the corruption.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act4_defeat",
+      "act": "Act4_Confrontation",
+      "entries": [
+        {
+          "id": "defeat_001",
+          "speaker": "Narrator",
+          "text": "The corruption fades. The twisted world unravels. What remains is silence... and the soft rustle of leaves.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "defeat_002",
+          "choices": []
+        },
+        {
+          "id": "defeat_002",
+          "speaker": "Ranima Corrupted",
+          "text": "No! This cannot... I...",
+          "textAssamese": "",
+          "emotion": "fearful",
+          "next": "defeat_003",
+          "choices": []
+        },
+        {
+          "id": "defeat_003",
+          "speaker": "Narrator",
+          "text": "The corrupted form dissolves. The injustice is answered. Not with vengeance, but with remembrance.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "epilogue_sunrise",
+      "act": "Epilogue",
+      "entries": [
+        {
+          "id": "epi_001",
+          "speaker": "Narrator",
+          "text": "A new day dawns. The sunrise paints the sky in gold and rose.",
+          "textAssamese": "",
+          "emotion": "happy",
+          "next": "epi_002",
+          "choices": []
+        },
+        {
+          "id": "epi_002",
+          "speaker": "Narrator",
+          "text": "Dom stands before the nahor tree. It is in full bloom - white petals drifting on a warm breeze.",
+          "textAssamese": "",
+          "emotion": "happy",
+          "next": "epi_003",
+          "choices": []
+        },
+        {
+          "id": "epi_003",
+          "speaker": "Tejimola Spirit",
+          "text": "Thank you... for remembering me. For giving me voice.",
+          "textAssamese": "ধন্যবাদ... মোক মনত ৰখাৰ বাবে। মোক মাত দিয়াৰ বাবে।",
+          "emotion": "happy",
+          "next": "epi_004",
+          "choices": []
+        },
+        {
+          "id": "epi_004",
+          "speaker": "Dom",
+          "text": "Your story will be told. Through the drum, through the flowers, through every bloom of the nahor tree.",
+          "textAssamese": "",
+          "emotion": "happy",
+          "next": "epi_005",
+          "choices": []
+        },
+        {
+          "id": "epi_005",
+          "speaker": "Narrator",
+          "text": "[Warm breeze blows. Tears fall gently. The nahor tree blooms with a radiance that feels like love itself.]",
+          "textAssamese": "",
+          "emotion": "happy",
+          "next": "epi_006",
+          "choices": []
+        },
+        {
+          "id": "epi_006",
+          "speaker": "Tejimola Spirit",
+          "text": "I am free now. And the flowers... they will always bloom.",
+          "textAssamese": "মই এতিয়া মুক্ত। আৰু ফুলবোৰ... সেইবোৰ সদায় ফুলি থাকিব।",
+          "emotion": "happy",
+          "next": "epi_007",
+          "choices": []
+        },
+        {
+          "id": "epi_007",
+          "speaker": "Narrator",
+          "text": "[The spirit gently dissolves into the petals of the nahor tree. Dom walks away, carrying her story in his drum.]",
+          "textAssamese": "",
+          "emotion": "happy",
+          "next": "epi_008",
+          "choices": []
+        },
+        {
+          "id": "epi_008",
+          "speaker": "Narrator",
+          "text": "TEJIMOLA: THE BLOSSOM FROM CLAY\n\nBased on the Assamese folktale.\nRemembering the stories that must never be forgotten.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    }
+  ]
+}

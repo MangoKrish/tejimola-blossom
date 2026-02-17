@@ -1,0 +1,241 @@
+{
+  "conversations": [
+    {
+      "id": "act1_opening",
+      "act": "Act1_HappyHome",
+      "entries": [
+        {
+          "id": "act1_001",
+          "speaker": "Narrator",
+          "text": "In a prosperous household near the mighty Brahmaputra River, golden light pours through the courtyard where a young girl plays...",
+          "textAssamese": "",
+          "audioFile": "",
+          "emotion": "happy",
+          "next": "act1_002",
+          "choices": []
+        },
+        {
+          "id": "act1_002",
+          "speaker": "Tejimola",
+          "text": "Baba! Look how high I can jump!",
+          "textAssamese": "বাবা! চোৱা মই কিমান ওখকৈ জপিয়াব পাৰোঁ!",
+          "audioFile": "",
+          "emotion": "happy",
+          "next": "act1_003",
+          "choices": []
+        },
+        {
+          "id": "act1_003",
+          "speaker": "Father",
+          "text": "Be careful, my little flower! Come, let me show you something in the garden.",
+          "textAssamese": "সাৱধান হোৱা, মোৰ সৰু ফুল! আহা, বাগিচাত তোমাক কিবা এটা দেখুৱাওঁ।",
+          "audioFile": "",
+          "emotion": "happy",
+          "next": "act1_004",
+          "choices": []
+        },
+        {
+          "id": "act1_004",
+          "speaker": "Narrator",
+          "text": "[Scene - Father gives Tejimola a golden hairpin near the nahor tree]",
+          "textAssamese": "",
+          "audioFile": "",
+          "emotion": "",
+          "next": "act1_005",
+          "choices": []
+        },
+        {
+          "id": "act1_005",
+          "speaker": "Father",
+          "text": "This flower will always bloom for you. I am here for you, always.",
+          "textAssamese": "এই ফুলটো তোমাৰ বাবে সদায় ফুলি থাকিব। মই তোমাৰ বাবে সদায় ইয়াত আছোঁ।",
+          "audioFile": "",
+          "emotion": "happy",
+          "next": "act1_006",
+          "choices": []
+        },
+        {
+          "id": "act1_006",
+          "speaker": "Tejimola",
+          "text": "What a beautiful flower! I will keep it forever, Baba!",
+          "textAssamese": "কি ধুনীয়া ফুল! মই ইয়াক চিৰদিনৰ বাবে ৰাখিম, বাবা!",
+          "audioFile": "",
+          "emotion": "happy",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act1_explore_home",
+      "act": "Act1_HappyHome",
+      "entries": [
+        {
+          "id": "explore_001",
+          "speaker": "Narrator",
+          "text": "Explore the household. This is your home - warm, familiar, and filled with love.",
+          "textAssamese": "",
+          "audioFile": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act1_kitchen",
+      "act": "Act1_HappyHome",
+      "entries": [
+        {
+          "id": "kitchen_001",
+          "speaker": "Tejimola",
+          "text": "The kitchen smells wonderful! Baba always makes the best pitha.",
+          "textAssamese": "ৰান্ধনীশালত কি সুন্দৰ গোন্ধ! বাবাই সদায় সকলোতকৈ ভাল পিঠা বনায়।",
+          "audioFile": "",
+          "emotion": "happy",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act1_bedroom",
+      "act": "Act1_HappyHome",
+      "entries": [
+        {
+          "id": "bedroom_001",
+          "speaker": "Tejimola",
+          "text": "My room... my safe place. All my toys are here.",
+          "textAssamese": "মোৰ কোঠা... মোৰ নিৰাপদ ঠাই। মোৰ সকলো খেলনা ইয়াত আছে।",
+          "audioFile": "",
+          "emotion": "happy",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act1_funeral",
+      "act": "Act1_Funeral",
+      "entries": [
+        {
+          "id": "funeral_001",
+          "speaker": "Narrator",
+          "text": "Time passes. The colors of the world begin to fade...",
+          "textAssamese": "",
+          "audioFile": "",
+          "emotion": "sad",
+          "next": "funeral_002",
+          "choices": []
+        },
+        {
+          "id": "funeral_002",
+          "speaker": "Village Elder",
+          "text": "He was a good man. The river carries his soul now. We must believe in what comes after.",
+          "textAssamese": "তেওঁ এজন ভাল মানুহ আছিল। নদীয়ে এতিয়া তেওঁৰ আত্মা বহন কৰিছে।",
+          "audioFile": "",
+          "emotion": "sad",
+          "next": "funeral_003",
+          "choices": []
+        },
+        {
+          "id": "funeral_003",
+          "speaker": "Tejimola",
+          "text": "Baba... why did you leave? Why did you go?",
+          "textAssamese": "বাবা... তুমি কিয় গুচি গ'লা? তুমি কিয় গ'লা?",
+          "audioFile": "",
+          "emotion": "sad",
+          "next": "funeral_004",
+          "choices": [
+            {
+              "text": "I miss you so much...",
+              "next": "funeral_004a",
+              "flag": "grieving_deeply"
+            },
+            {
+              "text": "I'll be strong, Baba. I promise.",
+              "next": "funeral_004b",
+              "flag": "staying_strong"
+            }
+          ]
+        },
+        {
+          "id": "funeral_004a",
+          "speaker": "Tejimola",
+          "text": "The house feels so empty without you. The nahor tree still blooms but... everything feels cold.",
+          "textAssamese": "",
+          "audioFile": "",
+          "emotion": "sad",
+          "next": "funeral_005",
+          "choices": []
+        },
+        {
+          "id": "funeral_004b",
+          "speaker": "Tejimola",
+          "text": "You told me the flowers always bloom. I will remember that. I will be brave.",
+          "textAssamese": "",
+          "audioFile": "",
+          "emotion": "sad",
+          "next": "funeral_005",
+          "choices": []
+        },
+        {
+          "id": "funeral_005",
+          "speaker": "Narrator",
+          "text": "And so, the merchant's household changed forever. When the father remarried...",
+          "textAssamese": "",
+          "audioFile": "",
+          "emotion": "",
+          "next": "funeral_006",
+          "choices": []
+        },
+        {
+          "id": "funeral_006",
+          "speaker": "Narrator",
+          "text": "...Ranima arrived. And with her, the shadows grew longer.",
+          "textAssamese": "",
+          "audioFile": "",
+          "emotion": "fearful",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act1_ranima_intro",
+      "act": "Act1_HappyHome",
+      "entries": [
+        {
+          "id": "ranima_001",
+          "speaker": "Ranima",
+          "text": "So this is the girl. Don't smile at me like that.",
+          "textAssamese": "",
+          "audioFile": "",
+          "emotion": "angry",
+          "next": "ranima_002",
+          "choices": []
+        },
+        {
+          "id": "ranima_002",
+          "speaker": "Tejimola",
+          "text": "I... welcome to our home, Ma.",
+          "textAssamese": "",
+          "audioFile": "",
+          "emotion": "fearful",
+          "next": "ranima_003",
+          "choices": []
+        },
+        {
+          "id": "ranima_003",
+          "speaker": "Ranima",
+          "text": "Your father is gone now. You will do as I say.",
+          "textAssamese": "",
+          "audioFile": "",
+          "emotion": "angry",
+          "next": "",
+          "choices": []
+        }
+      ]
+    }
+  ]
+}

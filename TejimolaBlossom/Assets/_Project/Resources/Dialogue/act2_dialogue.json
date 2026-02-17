@@ -1,0 +1,208 @@
+{
+  "conversations": [
+    {
+      "id": "act2_descent_begin",
+      "act": "Act2_Descent",
+      "entries": [
+        {
+          "id": "act2_001",
+          "speaker": "Narrator",
+          "text": "The colors gradually desaturate. Shadows lengthen across the once-warm household.",
+          "textAssamese": "",
+          "emotion": "sad",
+          "next": "act2_002",
+          "choices": []
+        },
+        {
+          "id": "act2_002",
+          "speaker": "Ranima",
+          "text": "Get up, girl. There is work to be done. Now.",
+          "textAssamese": "",
+          "emotion": "angry",
+          "next": "act2_003",
+          "choices": []
+        },
+        {
+          "id": "act2_003",
+          "speaker": "Tejimola",
+          "text": "Please give me some food to eat, Ma...",
+          "textAssamese": "অনুগ্ৰহ কৰি মোক কিছু খাবলৈ দিয়ক, মা...",
+          "emotion": "sad",
+          "next": "act2_004",
+          "choices": []
+        },
+        {
+          "id": "act2_004",
+          "speaker": "Ranima",
+          "text": "Eat when the work is done. Now go to the dheki. There is rice to husk.",
+          "textAssamese": "",
+          "emotion": "angry",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act2_stealth_intro",
+      "act": "Act2_Descent",
+      "entries": [
+        {
+          "id": "stealth_001",
+          "speaker": "Narrator",
+          "text": "Ranima watches every corner. Move carefully. If she catches you, there will be punishment.",
+          "textAssamese": "",
+          "emotion": "fearful",
+          "next": "stealth_002",
+          "choices": []
+        },
+        {
+          "id": "stealth_002",
+          "speaker": "Narrator",
+          "text": "Hide behind furniture and cabinets. Crouch to move quietly. Avoid her gaze.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act2_dheki_intro",
+      "act": "Act2_Dheki",
+      "entries": [
+        {
+          "id": "dheki_001",
+          "speaker": "Narrator",
+          "text": "The dheki awaits. A harsh, rhythmic labor. Match the beat to survive.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "dheki_002",
+          "choices": []
+        },
+        {
+          "id": "dheki_002",
+          "speaker": "Narrator",
+          "text": "Press Q and E in rhythm with the beat. The tempo will increase. As exhaustion grows, visions of the past may appear...",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act2_vision_father_boat",
+      "act": "Act2_Dheki",
+      "entries": [
+        {
+          "id": "vision_boat_001",
+          "speaker": "Tejimola",
+          "text": "I see... Baba's boat on the river! The sun is shining...",
+          "textAssamese": "মই দেখিছোঁ... নদীত বাবাৰ নাও! সূৰ্যৰ পোহৰ পৰিছে...",
+          "emotion": "happy",
+          "next": "vision_boat_002",
+          "choices": []
+        },
+        {
+          "id": "vision_boat_002",
+          "speaker": "Narrator",
+          "text": "[The vision fades as the rhythm intensifies]",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act2_dheki_fail",
+      "act": "Act2_Dheki",
+      "entries": [
+        {
+          "id": "fail_001",
+          "speaker": "Narrator",
+          "text": "Exhaustion takes hold. The rhythm fades. Tejimola collapses beside the dheki.",
+          "textAssamese": "",
+          "emotion": "sad",
+          "next": "fail_002",
+          "choices": []
+        },
+        {
+          "id": "fail_002",
+          "speaker": "Tejimola",
+          "text": "I can't do this anymore...",
+          "textAssamese": "মই আৰু এইটো কৰিব নোৱাৰো...",
+          "emotion": "sad",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act2_burial",
+      "act": "Act2_Burial",
+      "entries": [
+        {
+          "id": "burial_001",
+          "speaker": "Narrator",
+          "text": "The cruelty reaches its darkest moment. Beneath the nahor tree, a burial...",
+          "textAssamese": "",
+          "emotion": "sad",
+          "next": "burial_002",
+          "choices": []
+        },
+        {
+          "id": "burial_002",
+          "speaker": "Ranima",
+          "text": "No one will find her here. No one will know.",
+          "textAssamese": "",
+          "emotion": "angry",
+          "next": "burial_003",
+          "choices": []
+        },
+        {
+          "id": "burial_003",
+          "speaker": "Narrator",
+          "text": "But the earth remembers. The nahor tree drinks deep of sorrow... and begins to grow.",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "burial_004",
+          "choices": []
+        },
+        {
+          "id": "burial_004",
+          "speaker": "Narrator",
+          "text": "Years pass. The house falls to ruin. The village whispers of a restless spirit...",
+          "textAssamese": "",
+          "emotion": "",
+          "next": "",
+          "choices": []
+        }
+      ]
+    },
+    {
+      "id": "act2_caught",
+      "act": "Act2_Descent",
+      "entries": [
+        {
+          "id": "caught_001",
+          "speaker": "Ranima",
+          "text": "There you are! Hiding again? Lies! You never do as you're told!",
+          "textAssamese": "",
+          "emotion": "angry",
+          "next": "caught_002",
+          "choices": []
+        },
+        {
+          "id": "caught_002",
+          "speaker": "Tejimola",
+          "text": "I'm sorry, Ma... I'm sorry...",
+          "textAssamese": "ক্ষমা কৰিব, মা... ক্ষমা কৰিব...",
+          "emotion": "sad",
+          "next": "",
+          "choices": []
+        }
+      ]
+    }
+  ]
+}
