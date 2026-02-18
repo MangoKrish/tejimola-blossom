@@ -87,8 +87,8 @@ namespace Tejimola.Gameplay
         [SerializeField] private ParticleSystem transformVFX;
 
         [Header("Split Screen")]
-        [SerializeField] private Camera pastCamera;
-        [SerializeField] private Camera presentCamera;
+        [SerializeField] private UnityEngine.Camera pastCamera;
+        [SerializeField] private UnityEngine.Camera presentCamera;
 
         [Header("Interaction")]
         [SerializeField] private List<PuzzleStep> steps = new List<PuzzleStep>();

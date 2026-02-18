@@ -1,6 +1,7 @@
 using UnityEngine;
 using Tejimola.Core;
 using Tejimola.Utils;
+using Tejimola.Gameplay;
 
 namespace Tejimola.Characters
 {
