@@ -12,6 +12,7 @@ namespace Tejimola.Characters
         [Header("Movement")]
         [SerializeField] protected float moveSpeed = GameConstants.MoveSpeed;
         [SerializeField] protected float crouchSpeed = GameConstants.CrouchSpeed;
+        [SerializeField] protected float jumpForce = 10f;
 
         [Header("Interaction")]
         [SerializeField] protected float interactionRange = GameConstants.InteractionRange;
@@ -34,6 +35,7 @@ namespace Tejimola.Characters
         protected bool canMove = true;
         protected bool facingRight = true;
         protected bool isGrounded;
+        protected bool jumpQueued;
         protected Interactable nearestInteractable;
 
         // Animation hashes for performance
@@ -68,14 +70,30 @@ namespace Tejimola.Characters
         {
             if (!canMove || GameManager.Instance.IsGamePaused) return;
 
-            Move();
             CheckGround();
+            Move();
+
+            if (jumpQueued && isGrounded)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f); // cancel downward velocity first
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                jumpQueued = false;
+            }
+            else
+            {
+                jumpQueued = false; // cancel if not grounded
+            }
         }
 
         protected virtual void HandleInput()
         {
             moveInput.x = Input.GetAxisRaw("Horizontal");
             moveInput.y = 0;
+
+            // Jump — W or Up Arrow (Space is reserved for dialogue advance / stealth hide)
+            bool jumpKey = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
+            if (jumpKey && isGrounded && !isHiding && !isCrouching)
+                jumpQueued = true;
 
             if (Input.GetKeyDown(KeyCode.E) && nearestInteractable != null)
             {

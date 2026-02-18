@@ -34,6 +34,26 @@ public static class SceneBuilder
     // Cached references populated during build
     static AnimatorController s_tejiController;
     static AnimatorController s_domController;
+    static TMP_FontAsset s_defaultFont;
+
+    static TMP_FontAsset DefaultFont()
+    {
+        if (s_defaultFont != null) return s_defaultFont;
+        // Unity 6 built-in TMP font paths (try in order)
+        var paths = new[]
+        {
+            "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
+            "Packages/com.unity.ugui/PackageResources/TMP/Fonts/LiberationSans SDF.asset",
+        };
+        foreach (var p in paths)
+        {
+            s_defaultFont = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(p);
+            if (s_defaultFont != null) return s_defaultFont;
+        }
+        // Final fallback: whatever TMP considers default
+        s_defaultFont = TMP_Settings.defaultFontAsset;
+        return s_defaultFont;
+    }
 
     // ═══════════════════════════════════════════════════════════
     //  ENTRY POINT
@@ -1210,6 +1230,23 @@ public static class SceneBuilder
             catchProp.GetArrayElementAtIndex(i).objectReferenceValue = catchIcons[i];
         hso.ApplyModifiedProperties();
 
+        // ─── Controls Hint (bottom-right, semi-transparent) ───
+        var controlsHintGO = new GameObject("ControlsHint");
+        controlsHintGO.transform.SetParent(cvs, false);
+        var chRT = controlsHintGO.AddComponent<RectTransform>();
+        chRT.anchorMin        = new Vector2(1f, 0f);
+        chRT.anchorMax        = new Vector2(1f, 0f);
+        chRT.anchoredPosition = new Vector2(-10f, 10f);
+        chRT.sizeDelta        = new Vector2(360f, 70f);
+        chRT.pivot            = new Vector2(1f, 0f);
+        var chTMP = controlsHintGO.AddComponent<TextMeshProUGUI>();
+        chTMP.text      = "A/D — Move    W/↑ — Jump    E — Interact\nSpace — Talk/Hide    Esc — Pause";
+        chTMP.fontSize  = 14f;
+        chTMP.alignment = TextAlignmentOptions.BottomRight;
+        chTMP.color     = new Color(1f, 1f, 1f, 0.45f);
+        var chFont = DefaultFont();
+        if (chFont != null) chTMP.font = chFont;
+
         // ─── Dialogue Box ──────────────────────────────────────
         var dlgPanel = MakePanel(cvs, "DialoguePanel", new Color(0.05f, 0.02f, 0.02f, 0.92f));
         SetRect(dlgPanel.transform, new Vector2(0, 10), new Vector2(1400, 220), new Vector2(0.5f, 0), new Vector2(0.5f, 0));
@@ -1623,6 +1660,8 @@ public static class SceneBuilder
         tmp.fontSize  = size;
         tmp.alignment = align;
         tmp.color     = Color.white;
+        var font = DefaultFont();
+        if (font != null) tmp.font = font;
         return tmp;
     }
 
@@ -1643,6 +1682,8 @@ public static class SceneBuilder
         var tmp = lblGO.AddComponent<TextMeshProUGUI>();
         tmp.text = label; tmp.fontSize = 20; tmp.alignment = TextAlignmentOptions.Center;
         tmp.color = new Color(1f, 0.9f, 0.7f);
+        var font = DefaultFont();
+        if (font != null) tmp.font = font;
         return btn;
     }
 

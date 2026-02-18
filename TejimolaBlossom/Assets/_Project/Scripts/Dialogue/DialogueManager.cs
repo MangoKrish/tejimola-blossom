@@ -131,7 +131,7 @@ namespace Tejimola.Dialogue
             isPlaying = true;
 
             GameManager.Instance.SetPhase(GamePhase.Dialogue);
-            FindFirstObjectByType<Characters.CharacterController2D>()?.SetCanMove(false);
+            // Movement stays enabled — players can walk while reading dialogue
 
             PlayCurrentEntry();
         }
@@ -267,7 +267,6 @@ namespace Tejimola.Dialogue
 
             OnConversationEnded?.Invoke();
             GameManager.Instance.SetPhase(GamePhase.Exploration);
-            FindFirstObjectByType<Characters.CharacterController2D>()?.SetCanMove(true);
 
             EventManager.Instance.Publish(EventManager.Events.DialogueEnded);
         }
