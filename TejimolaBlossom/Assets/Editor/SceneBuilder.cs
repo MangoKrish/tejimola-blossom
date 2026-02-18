@@ -39,20 +39,21 @@ public static class SceneBuilder
     static TMP_FontAsset DefaultFont()
     {
         if (s_defaultFont != null) return s_defaultFont;
-        // Unity 6 built-in TMP font paths (try in order)
+        // Unity 6 TMP font paths — try common locations
         var paths = new[]
         {
             "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset",
             "Packages/com.unity.ugui/PackageResources/TMP/Fonts/LiberationSans SDF.asset",
+            "Packages/com.unity.textmeshpro/Resources/Fonts & Materials/LiberationSans SDF.asset",
         };
         foreach (var p in paths)
         {
-            s_defaultFont = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(p);
+            try { s_defaultFont = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(p); } catch { }
             if (s_defaultFont != null) return s_defaultFont;
         }
-        // Final fallback: whatever TMP considers default
-        s_defaultFont = TMP_Settings.defaultFontAsset;
-        return s_defaultFont;
+        // TMP_Settings.defaultFontAsset can throw in batch mode — guard it
+        try { s_defaultFont = TMP_Settings.defaultFontAsset; } catch { }
+        return s_defaultFont; // callers must null-check before assigning
     }
 
     // ═══════════════════════════════════════════════════════════
