@@ -1,5 +1,6 @@
 using UnityEngine;
 using Tejimola.Core;
+using Tejimola.Utils;
 
 namespace Tejimola.Scenes
 {
