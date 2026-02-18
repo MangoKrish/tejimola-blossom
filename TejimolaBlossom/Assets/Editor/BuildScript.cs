@@ -41,6 +41,25 @@ public class BuildScript
         EditorApplication.Exit(0);
     }
 
+    // Called from command line via -executeMethod BuildScript.BatchBuildAll
+    // Builds all scenes first, then compiles the .exe
+    public static void BatchBuildAll()
+    {
+        try
+        {
+            Debug.Log("=== Step 1/2: Building all game scenes ===");
+            SceneBuilder.BuildAllScenesBatch();
+            Debug.Log("=== Step 2/2: Compiling Windows .exe ===");
+            BuildWindows();
+            EditorApplication.Exit(0);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"BatchBuildAll FAILED: {e}");
+            EditorApplication.Exit(1);
+        }
+    }
+
     private static string[] GetScenes()
     {
         var scenes = new System.Collections.Generic.List<string>();

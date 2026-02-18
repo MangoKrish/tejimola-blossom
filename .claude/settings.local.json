@@ -11,7 +11,18 @@
       "Bash(gh auth status:*)",
       "Bash(git --version:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(brew:*)",
+      "Bash(gh repo create:*)",
+      "Bash(pgrep:*)",
+      "Bash(\"/Applications/Unity Hub.app/Contents/MacOS/Unity Hub\" -- --help)",
+      "Bash(sudo installer:*)",
+      "Bash(pkgutil --expand:*)",
+      "Bash(\"/Applications/Unity/Hub/Editor/6000.3.8f1/Unity.app/Contents/MacOS/Unity\" -batchmode -quit -projectPath \"/Users/krishnas/Desktop/game/TejimolaBlossom\" -executeMethod BuildScript.BatchBuild -logFile \"/tmp/unity_build.log\" -buildTarget StandaloneWindows64)",
+      "Bash(zip -r:*)",
+      "Bash(git push:*)",
+      "Bash(gh release create:*)"
     ]
   }
 }
