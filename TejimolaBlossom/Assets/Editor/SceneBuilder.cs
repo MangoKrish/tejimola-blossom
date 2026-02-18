@@ -88,6 +88,9 @@ public static class SceneBuilder
             Directory.CreateDirectory(PREFABS);
             CreateAnimatorControllers();
 
+            Debug.Log("[SceneBuilder] Configuring sprite import settings…");
+            ConfigureAllSpritesheets();
+
             Debug.Log("[SceneBuilder] Setting up animation clips…");
             AnimationSetup.SetupAnimationsBatch();
 
@@ -121,6 +124,64 @@ public static class SceneBuilder
     }
 
     // ═══════════════════════════════════════════════════════════
+    //  SPRITESHEET IMPORT CONFIG
+    // ═══════════════════════════════════════════════════════════
+
+    static void ConfigureAllSpritesheets()
+    {
+        // Character spritesheets: 4 frames × 64×96 px laid horizontally
+        var sheets = new[]
+        {
+            "Sprites/Characters/tejimola_child_spritesheet.png",
+            "Sprites/Characters/tejimola_spirit_spritesheet.png",
+            "Sprites/Characters/dom_spritesheet.png",
+            "Sprites/Characters/ranima_spritesheet.png",
+            "Sprites/Characters/ranima_corrupted_spritesheet.png",
+            "Sprites/Characters/father_spritesheet.png",
+        };
+        foreach (var rel in sheets)
+            ConfigureSpritesheet(rel, 4, 64, 96);
+
+        AssetDatabase.Refresh();
+    }
+
+    static void ConfigureSpritesheet(string relPath, int frameCount, int frameW, int frameH)
+    {
+        string fullPath = $"{ART}/{relPath}";
+        var importer = AssetImporter.GetAtPath(fullPath) as TextureImporter;
+        if (importer == null) { Debug.LogWarning($"[SceneBuilder] No importer for {fullPath}"); return; }
+
+        importer.textureType        = TextureImporterType.Sprite;
+        importer.spriteImportMode   = SpriteImportMode.Multiple;
+        importer.filterMode         = FilterMode.Point;   // pixel-art crisp scaling
+        importer.textureCompression = TextureImporterCompression.Uncompressed;
+
+        var metas = new SpriteMetaData[frameCount];
+        string baseName = Path.GetFileNameWithoutExtension(relPath);
+        for (int i = 0; i < frameCount; i++)
+        {
+            metas[i] = new SpriteMetaData
+            {
+                name      = $"{baseName}_{i}",
+                rect      = new Rect(i * frameW, 0, frameW, frameH),
+                pivot     = new Vector2(0.5f, 0f),
+                alignment = (int)SpriteAlignment.BottomCenter,
+            };
+        }
+        importer.spritesheet = metas;
+        importer.SaveAndReimport();
+    }
+
+    // Load first frame (idle) from a sliced spritesheet
+    static Sprite IdleSprite(string relPath)
+    {
+        string fullPath = $"{ART}/{relPath}";
+        var all = AssetDatabase.LoadAllAssetsAtPath(fullPath);
+        foreach (var a in all)
+            if (a is Sprite s) return s;   // first sprite = idle frame 0
+        return AssetDatabase.LoadAssetAtPath<Sprite>(fullPath); // fallback
+    }
+
     //  LAYER SETUP
     // ═══════════════════════════════════════════════════════════
 
@@ -234,8 +295,9 @@ public static class SceneBuilder
         RectAt(bgPanel.transform, 0f, 0f, 1f, 1f);
         bgPanel.transform.SetAsFirstSibling();
         var bgImg = bgPanel.GetComponent<Image>();
-        bgImg.sprite = Spr("UI/Menu/menu_background.png");
-        bgImg.type   = Image.Type.Sliced;
+        bgImg.sprite          = Spr("UI/Menu/menu_background.png");
+        bgImg.type            = Image.Type.Simple;  // no 9-slice; generated sprites have no border data
+        bgImg.preserveAspect  = false;
 
         // ── Nahor Tree Image (canvas right side) ──
         var treePanel = MakePanel(cvs, "NahorTreeDecoration", Color.white);
@@ -1066,8 +1128,10 @@ public static class SceneBuilder
         go.transform.position = pos;
 
         var sr  = go.AddComponent<SpriteRenderer>();
-        sr.sprite       = Spr(spritePath);
+        sr.sprite       = IdleSprite(spritePath); // idle frame 0 from sliced spritesheet
         sr.sortingOrder = 5;
+        // Scale: 64px sprite @ 100px/unit = 0.64 units → scale to 1.6 units tall to match collider
+        go.transform.localScale = new Vector3(2.5f, 2.5f, 1f);
 
         var rb  = go.AddComponent<Rigidbody2D>();
         rb.gravityScale          = 3f;
@@ -1256,7 +1320,7 @@ public static class SceneBuilder
 
         var dlgBg = dlgPanel.GetComponent<Image>();
         dlgBg.sprite = Spr("UI/DialogueBox/dialogue_box.png");
-        dlgBg.type   = Image.Type.Sliced;
+        dlgBg.type   = Image.Type.Simple;
 
         // Portrait
         var portraitGO = MakePanel(dlgPanel.transform, "SpeakerPortrait", Color.white);
@@ -1673,7 +1737,7 @@ public static class SceneBuilder
         var rt  = go.AddComponent<RectTransform>();
         rt.sizeDelta = new Vector2(220, 55);
         var img = go.AddComponent<Image>();
-        if (sprite != null) { img.sprite = sprite; img.type = Image.Type.Sliced; }
+        if (sprite != null) { img.sprite = sprite; img.type = Image.Type.Simple; img.preserveAspect = false; }
         else img.color = new Color(0.2f, 0.1f, 0.05f, 0.9f);
         var btn = go.AddComponent<Button>();
         var lblGO = new GameObject("Label");
