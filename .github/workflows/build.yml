@@ -22,9 +22,7 @@ jobs:
       # Zip the pre-built Windows exe committed in the repo
       - name: Zip Windows Build
         run: |
-          BUILD_DIR=$(find . -maxdepth 3 -type f -name "*.exe" | head -1 | xargs dirname)
-          echo "Found build at: $BUILD_DIR"
-          zip -r TejimolaBlossom-Windows.zip "$BUILD_DIR"
+          zip -r TejimolaBlossom-Windows.zip "Builds/Windows/"
           ls -lh TejimolaBlossom-Windows.zip
 
       # Create a GitHub Release with the .zip
