@@ -56,13 +56,30 @@ namespace Tejimola.Core
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             GameManager.Instance.LoadSaveData(data);
 
-            // Load the appropriate scene
-            string sceneName = data.currentAct.ToString();
+            // Load the appropriate scene (explicit mapping to match build scene names)
+            string sceneName = ActToSceneName(data.currentAct);
             SceneLoader.Instance.LoadScene(sceneName);
 
             EventManager.Instance.Publish(EventManager.Events.GameLoaded);
             Debug.Log("Game loaded successfully.");
             return true;
+        }
+
+        static string ActToSceneName(Utils.GameAct act)
+        {
+            return act switch
+            {
+                Utils.GameAct.Act1_HappyHome      => "Act1_HappyHome",
+                Utils.GameAct.Act1_Funeral        => "Act1_Funeral",
+                Utils.GameAct.Act2_Descent        => "Act2_Descent",
+                Utils.GameAct.Act2_Dheki          => "Act2_Dheki",
+                Utils.GameAct.Act2_Burial         => "Act2_Burial",
+                Utils.GameAct.Act3_DomArrival     => "Act3_DomArrival",
+                Utils.GameAct.Act3_DualTimeline   => "Act3_DualTimeline",
+                Utils.GameAct.Act4_Confrontation  => "Act4_Confrontation",
+                Utils.GameAct.Epilogue            => "Epilogue",
+                _                                 => "Act1_HappyHome"
+            };
         }
 
         public bool HasSaveFile()

@@ -13,6 +13,7 @@ namespace Tejimola.Scenes
         {
             sceneAct = GameAct.Act3_DualTimeline;
             dialogueFile = "act3_dialogue";
+            openingConversationId = "act3_dual_intro";
             objectiveText = "Recover Tejimola's memories (0/5)";
             ambientColor = new Color(0.3f, 0.2f, 0.5f);
             ambientIntensity = 0.5f;

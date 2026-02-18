@@ -503,6 +503,7 @@ public static class SceneBuilder
         var setupGO = new GameObject("SceneSetup");
         var setup   = setupGO.AddComponent<Act2DhekiSetup>();
         SetSO(setup, "rhythmEngine", rhythm);
+        SetSO(setup, "rhythmUI",     rhythmUI);  // needed so Act2DhekiSetup can call rhythmUI.Initialize()
     }
 
     // ═══════════════════════════════════════════════════════════
@@ -1028,7 +1029,8 @@ public static class SceneBuilder
         // ─── Dialogue Box ──────────────────────────────────────
         var dlgPanel = MakePanel(cvs, "DialoguePanel", new Color(0.05f, 0.02f, 0.02f, 0.92f));
         SetRect(dlgPanel.transform, new Vector2(0, 10), new Vector2(1400, 220), new Vector2(0.5f, 0), new Vector2(0.5f, 0));
-        dlgPanel.SetActive(false);
+        // Keep active — DialogueBoxUI.Awake() hides itself via CanvasGroup alpha.
+        // SetActive(false) would prevent Awake from ever running, breaking dialogue subscriptions.
 
         var dlgBg = dlgPanel.GetComponent<Image>();
         dlgBg.sprite = Spr("UI/DialogueBox/dialogue_box.png");
@@ -1115,7 +1117,8 @@ public static class SceneBuilder
         // ─── Pause Menu ───────────────────────────────────────
         var pausePanel = MakePanel(cvs, "PauseMenu", new Color(0, 0, 0, 0.85f));
         SetRect(pausePanel.transform, Vector2.zero, Vector2.zero, Vector2.zero, Vector2.one);
-        pausePanel.SetActive(false);
+        // Keep active — PauseMenuUI.Awake() calls HidePanels() to hide sub-panels on start.
+        // SetActive(false) would prevent Awake from running, breaking button wiring.
 
         MakeTMP(pausePanel.transform, "PauseTitle", "PAUSED", 48, TextAlignmentOptions.Center);
         var resumeBtn = MakeButton(pausePanel.transform, "ResumeButton",     "Resume",         Spr("UI/Menu/btn_resume.png"));

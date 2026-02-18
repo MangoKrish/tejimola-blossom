@@ -39,42 +39,73 @@ namespace Tejimola.UI
 
         private DialogueManager dialogueManager;
         private CanvasGroup canvasGroup;
+        private bool initialized;
 
-        void Start()
+        void Awake()
         {
-            dialogueManager = DialogueManager.Instance;
-
+            // Initialize CanvasGroup here so it works even when the GO starts inactive
             canvasGroup = GetComponent<CanvasGroup>();
             if (canvasGroup == null)
                 canvasGroup = gameObject.AddComponent<CanvasGroup>();
 
-            // Subscribe to dialogue events
+            // Hide via alpha so we don't deactivate ourselves
+            HideImmediate();
+        }
+
+        void OnEnable()
+        {
+            // Subscribe each time we become active (safe to call multiple times)
+            EnsureInitialized();
+        }
+
+        void OnDisable()
+        {
+            UnsubscribeFromDialogue();
+        }
+
+        void EnsureInitialized()
+        {
+            if (initialized) return;
+            initialized = true;
+
+            dialogueManager = DialogueManager.Instance;
+            SubscribeToDialogue();
+
+            // Setup choice buttons
+            if (choiceButtons != null)
+            {
+                for (int i = 0; i < choiceButtons.Length; i++)
+                {
+                    if (choiceButtons[i] == null) continue;
+                    int index = i;
+                    choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(index));
+                }
+            }
+        }
+
+        void SubscribeToDialogue()
+        {
+            if (dialogueManager == null) return;
             dialogueManager.OnDialogueLineStarted += OnLineStarted;
             dialogueManager.OnTextUpdated += OnTextUpdated;
             dialogueManager.OnChoicesPresented += OnChoicesPresented;
             dialogueManager.OnConversationEnded += OnConversationEnded;
             dialogueManager.OnSpeakerChanged += OnSpeakerChanged;
+        }
 
-            // Setup choice buttons
-            for (int i = 0; i < choiceButtons.Length; i++)
-            {
-                int index = i; // Capture for closure
-                choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(index));
-            }
-
-            Hide();
+        void UnsubscribeFromDialogue()
+        {
+            if (dialogueManager == null) return;
+            dialogueManager.OnDialogueLineStarted -= OnLineStarted;
+            dialogueManager.OnTextUpdated -= OnTextUpdated;
+            dialogueManager.OnChoicesPresented -= OnChoicesPresented;
+            dialogueManager.OnConversationEnded -= OnConversationEnded;
+            dialogueManager.OnSpeakerChanged -= OnSpeakerChanged;
         }
 
         void OnDestroy()
         {
-            if (dialogueManager != null)
-            {
-                dialogueManager.OnDialogueLineStarted -= OnLineStarted;
-                dialogueManager.OnTextUpdated -= OnTextUpdated;
-                dialogueManager.OnChoicesPresented -= OnChoicesPresented;
-                dialogueManager.OnConversationEnded -= OnConversationEnded;
-                dialogueManager.OnSpeakerChanged -= OnSpeakerChanged;
-            }
+            UnsubscribeFromDialogue();
         }
 
         void OnLineStarted(DialogueEntry entry)
@@ -84,14 +115,12 @@ namespace Tejimola.UI
             if (continueIndicator != null)
                 continueIndicator.SetActive(false);
 
-            // Set speaker name with color
             if (speakerNameText != null)
             {
                 speakerNameText.text = entry.speaker;
                 speakerNameText.color = GetSpeakerColor(entry.speaker);
             }
 
-            // Set Assamese text if available
             if (assameseText != null && !string.IsNullOrEmpty(entry.textAssamese))
             {
                 assameseText.gameObject.SetActive(true);
@@ -102,7 +131,6 @@ namespace Tejimola.UI
                 assameseText.gameObject.SetActive(false);
             }
 
-            // Set portrait
             SetPortrait(entry.speaker, entry.emotion);
         }
 
@@ -117,12 +145,16 @@ namespace Tejimola.UI
             if (choicePanel == null) return;
             choicePanel.SetActive(true);
 
+            if (choiceButtons == null || choiceTexts == null) return;
+
             for (int i = 0; i < choiceButtons.Length; i++)
             {
+                if (choiceButtons[i] == null) continue;
                 if (i < choices.Length)
                 {
                     choiceButtons[i].gameObject.SetActive(true);
-                    choiceTexts[i].text = $"[{(char)('A' + i)}] {choices[i].text}";
+                    if (i < choiceTexts.Length && choiceTexts[i] != null)
+                        choiceTexts[i].text = $"[{(char)('A' + i)}] {choices[i].text}";
                 }
                 else
                 {
@@ -138,7 +170,7 @@ namespace Tejimola.UI
 
         void OnSpeakerChanged(string speaker)
         {
-            // Could trigger portrait animation here
+            // Portrait animation could go here
         }
 
         void OnChoiceSelected(int index)
@@ -171,7 +203,6 @@ namespace Tejimola.UI
                 speakerPortrait.gameObject.SetActive(false);
             }
 
-            // Emotion-based tinting
             if (speakerPortrait != null && !string.IsNullOrEmpty(emotion))
             {
                 Color emotionTint = emotion.ToLower() switch
@@ -182,7 +213,6 @@ namespace Tejimola.UI
                     "fearful" => GameColors.DarkSlate,
                     _ => Color.white
                 };
-                // Slight tint, not full replacement
                 speakerPortrait.color = Color.Lerp(Color.white, emotionTint, 0.2f);
             }
         }
@@ -203,14 +233,34 @@ namespace Tejimola.UI
 
         void Show()
         {
-            dialoguePanel?.SetActive(true);
-            if (canvasGroup != null) canvasGroup.alpha = 1f;
+            // Ensure we're initialized (handles case where GO was initially inactive)
+            EnsureInitialized();
+
+            if (dialoguePanel != null)
+                dialoguePanel.SetActive(true);
+            if (canvasGroup != null)
+            {
+                canvasGroup.alpha = 1f;
+                canvasGroup.blocksRaycasts = true;
+                canvasGroup.interactable = true;
+            }
         }
 
         void Hide()
         {
-            dialoguePanel?.SetActive(false);
-            if (canvasGroup != null) canvasGroup.alpha = 0f;
+            HideImmediate();
+        }
+
+        void HideImmediate()
+        {
+            // Use CanvasGroup alpha so we don't deactivate our own GameObject
+            if (canvasGroup != null)
+            {
+                canvasGroup.alpha = 0f;
+                canvasGroup.blocksRaycasts = false;
+                canvasGroup.interactable = false;
+            }
+            choicePanel?.SetActive(false);
         }
     }
 }

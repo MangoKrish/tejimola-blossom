@@ -85,11 +85,11 @@ namespace Tejimola.Characters
 
         public void ExitHidingSpot()
         {
-            SetHiding(false);
+            currentHidingSpot = null;
+            SetHiding(false);  // sets canMove=true inside SetHiding()
             var color = spriteRenderer.color;
             color.a = 1f;
             spriteRenderer.color = color;
-            currentHidingSpot = null;
         }
 
         public void OnCaught()

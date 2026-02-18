@@ -44,12 +44,15 @@ namespace Tejimola.UI
         [SerializeField] private TextMeshProUGUI bossNameText;
 
         private float notificationTimer;
+        private float objectiveFadeTimer;
+        private Characters.DomBehaviour cachedDom;
 
         void Start()
         {
             SubscribeEvents();
             RefreshHUD();
             HideAll();
+            cachedDom = FindFirstObjectByType<Characters.DomBehaviour>();
         }
 
         void OnDestroy()
@@ -123,11 +126,10 @@ namespace Tejimola.UI
 
             if (isDom)
             {
-                var dom = FindFirstObjectByType<Characters.DomBehaviour>();
-                if (dom != null && pulseCooldownFill != null)
-                {
-                    pulseCooldownFill.fillAmount = dom.GetPulseCooldownPercent();
-                }
+                if (cachedDom == null)
+                    cachedDom = FindFirstObjectByType<Characters.DomBehaviour>();
+                if (cachedDom != null && pulseCooldownFill != null)
+                    pulseCooldownFill.fillAmount = cachedDom.GetPulseCooldownPercent();
             }
         }
 
@@ -179,7 +181,7 @@ namespace Tejimola.UI
             if (objectiveGroup != null)
             {
                 objectiveGroup.alpha = 1f;
-                // Auto-fade after 5 seconds handled in Update
+                objectiveFadeTimer = 5f;
             }
         }
 
@@ -199,6 +201,13 @@ namespace Tejimola.UI
                 notificationTimer -= Time.deltaTime;
                 if (notificationTimer <= 1f && notificationGroup != null)
                     notificationGroup.alpha = notificationTimer;
+            }
+
+            if (objectiveFadeTimer > 0 && objectiveGroup != null)
+            {
+                objectiveFadeTimer -= Time.deltaTime;
+                if (objectiveFadeTimer <= 1f)
+                    objectiveGroup.alpha = objectiveFadeTimer;
             }
         }
 

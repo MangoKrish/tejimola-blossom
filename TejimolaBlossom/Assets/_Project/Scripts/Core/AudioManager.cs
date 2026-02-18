@@ -34,6 +34,7 @@ namespace Tejimola.Core
         private AudioSource _musicSourceB;
         private AudioSource _ambientSource;
         private bool _musicSourceAActive = true;
+        private Coroutine _crossfadeCoroutine; // prevent concurrent crossfades
 
         [Header("SFX Pool")]
         private List<AudioSource> _sfxPool = new List<AudioSource>();
@@ -101,7 +102,10 @@ namespace Tejimola.Core
         public void PlayMusic(AudioClip clip, float fadeDuration = 1.5f)
         {
             if (clip == null) return;
-            StartCoroutine(CrossfadeMusic(clip, fadeDuration));
+            // Cancel any in-progress crossfade before starting a new one
+            if (_crossfadeCoroutine != null)
+                StopCoroutine(_crossfadeCoroutine);
+            _crossfadeCoroutine = StartCoroutine(CrossfadeMusic(clip, fadeDuration));
         }
 
         public void PlayMusic(string resourcePath, float fadeDuration = 1.5f)
@@ -134,6 +138,7 @@ namespace Tejimola.Core
             fadeOut.volume = 0f;
             fadeIn.volume = _musicVolume;
             _musicSourceAActive = !_musicSourceAActive;
+            _crossfadeCoroutine = null;
         }
 
         public void StopMusic(float fadeDuration = 1f)
@@ -213,9 +218,14 @@ namespace Tejimola.Core
             foreach (var source in _sfxPool)
             {
                 if (!source.isPlaying)
+                {
+                    source.loop = false; // reset loop flag from any previous PlaySFXLooping call
                     return source;
+                }
             }
-            // All busy, reuse the first
+            // All busy, reuse the first (stop it cleanly first)
+            _sfxPool[0].Stop();
+            _sfxPool[0].loop = false;
             return _sfxPool[0];
         }
 

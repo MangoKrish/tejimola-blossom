@@ -105,14 +105,20 @@ namespace Tejimola.Gameplay
         void GenerateDefaultBeatMap()
         {
             beatMap.Clear();
-            float beatInterval = 60f / startBPM;
+            float bpm = startBPM;
+            float beatInterval = 60f / bpm;
 
             // Generate progression: Beats 1-3 (easy), 4-6 (medium), 7-9 (hard), 10+ (intense)
             for (int i = 0; i < 30; i++)
             {
+                // Snapshot the BPM at generation time so timing is stable
+                float snapshotBpm = Mathf.Min(maxBPM, startBPM + (i * bpmIncreasePerBeat));
+                float interval    = 60f / snapshotBpm;
+
                 BeatData beat = new BeatData();
-                beat.index = i;
-                beat.time = i * beatInterval;
+                beat.index       = i;
+                beat.time        = i * beatInterval;
+                beat.snapshotBPM = snapshotBpm;
 
                 // Alternate left/right with patterns
                 if (i < 3)
@@ -151,6 +157,7 @@ namespace Tejimola.Gameplay
         void Update()
         {
             if (!isPlaying || GameManager.Instance.IsGamePaused) return;
+            if (visionActive) return; // pause beat processing while vision choice is pending
 
             double currentDspTime = AudioSettings.dspTime;
 
@@ -158,7 +165,10 @@ namespace Tejimola.Gameplay
             if (currentBeatIndex < beatMap.Count)
             {
                 currentBeat = beatMap[currentBeatIndex];
-                double beatTime = songStartDspTime + (60.0 / currentBPM * currentBeatIndex);
+                // Use the beat's snapshot BPM (stored at generation time) to avoid
+                // retroactive timing shifts from live BPM updates
+                double beatBPM = currentBeat.snapshotBPM > 0 ? currentBeat.snapshotBPM : currentBPM;
+                double beatTime = songStartDspTime + (60.0 / beatBPM * currentBeatIndex);
 
                 // Signal approaching beat for UI
                 double timeUntilBeat = beatTime - currentDspTime;
@@ -379,6 +389,7 @@ namespace Tejimola.Gameplay
         public KeyCode inputKey;
         public int difficulty;
         public bool triggersVision;
+        public float snapshotBPM; // BPM at the time this beat was scheduled (prevents retroactive timing shifts)
     }
 
     [System.Serializable]

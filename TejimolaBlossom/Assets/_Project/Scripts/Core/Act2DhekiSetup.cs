@@ -8,6 +8,7 @@ namespace Tejimola.Scenes
     public class Act2DhekiSetup : SceneSetup
     {
         [SerializeField] private RhythmEngine rhythmEngine;
+        [SerializeField] private RhythmUI rhythmUI;
 
         protected override void Start()
         {
@@ -28,6 +29,11 @@ namespace Tejimola.Scenes
         void StartRhythmSequence()
         {
             EventManager.Instance.Unsubscribe(EventManager.Events.DialogueEnded, StartRhythmSequence);
+
+            // Initialize RhythmUI with the engine before starting
+            if (rhythmUI != null && rhythmEngine != null)
+                rhythmUI.Initialize(rhythmEngine);
+
             if (rhythmEngine != null)
                 rhythmEngine.StartRhythmSequence();
         }

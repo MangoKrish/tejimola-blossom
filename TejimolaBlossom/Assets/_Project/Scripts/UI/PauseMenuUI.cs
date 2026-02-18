@@ -37,11 +37,20 @@ namespace Tejimola.UI
 
         private bool isPaused;
         private float playTime;
+        private bool buttonsSetUp;
 
-        void Start()
+        void Awake()
         {
+            // Set up buttons in Awake so they work even if this GO starts inactive
             SetupButtons();
-            Hide();
+            HidePanels();
+        }
+
+        void OnEnable()
+        {
+            // Re-setup buttons if needed (e.g. after scene reload)
+            if (!buttonsSetUp)
+                SetupButtons();
         }
 
         void Update()
@@ -60,6 +69,9 @@ namespace Tejimola.UI
 
         void SetupButtons()
         {
+            if (buttonsSetUp) return;
+            buttonsSetUp = true;
+
             resumeButton?.onClick.AddListener(Resume);
             saveButton?.onClick.AddListener(SaveGame);
             loadButton?.onClick.AddListener(LoadGame);
@@ -73,25 +85,28 @@ namespace Tejimola.UI
             GameAct[] chapterActs = { GameAct.Act1_HappyHome, GameAct.Act2_Descent,
                                       GameAct.Act3_DomArrival, GameAct.Act4_Confrontation, GameAct.Epilogue };
 
-            for (int i = 0; i < chapterButtons.Length && i < chapterNames.Length; i++)
+            if (chapterButtons != null)
             {
-                int index = i;
-                if (chapterLabels != null && i < chapterLabels.Length)
-                    chapterLabels[i].text = chapterNames[i];
-                chapterButtons[i].onClick.AddListener(() => LoadChapter(chapterActs[index]));
+                for (int i = 0; i < chapterButtons.Length && i < chapterNames.Length; i++)
+                {
+                    if (chapterButtons[i] == null) continue;
+                    int index = i;
+                    if (chapterLabels != null && i < chapterLabels.Length && chapterLabels[i] != null)
+                        chapterLabels[i].text = chapterNames[i];
+                    chapterButtons[i].onClick.AddListener(() => LoadChapter(chapterActs[index]));
+                }
             }
         }
 
         void Pause()
         {
-            if (GameManager.Instance.CurrentPhase == GamePhase.Rhythm) return; // Don't pause during rhythm
+            if (GameManager.Instance.CurrentPhase == GamePhase.Rhythm) return;
             if (GameManager.Instance.CurrentAct == GameAct.MainMenu) return;
 
             isPaused = true;
             GameManager.Instance.PauseGame();
             Show();
 
-            // Update info
             if (currentChapterText != null)
                 currentChapterText.text = $"Chapter: {FormatActName(GameManager.Instance.CurrentAct)}";
             if (playTimeText != null)
@@ -107,7 +122,7 @@ namespace Tejimola.UI
         {
             isPaused = false;
             GameManager.Instance.ResumeGame();
-            Hide();
+            HidePanels();
         }
 
         void SaveGame()
@@ -118,7 +133,7 @@ namespace Tejimola.UI
 
         void LoadGame()
         {
-            Hide();
+            HidePanels();
             isPaused = false;
             SaveManager.Instance.LoadGame();
         }
@@ -129,7 +144,18 @@ namespace Tejimola.UI
             chapterSelectPanel?.SetActive(true);
 
             // Enable only chapters the player has reached
-            // For now, enable all chapters player has flags for
+            if (chapterButtons != null)
+            {
+                GameAct[] acts = { GameAct.Act1_HappyHome, GameAct.Act2_Descent,
+                                   GameAct.Act3_DomArrival, GameAct.Act4_Confrontation, GameAct.Epilogue };
+                for (int i = 0; i < chapterButtons.Length && i < acts.Length; i++)
+                {
+                    if (chapterButtons[i] == null) continue;
+                    // Enable act if it's the first act or player has reached/passed this act
+                    bool unlocked = (int)GameManager.Instance.CurrentAct >= (int)acts[i] || i == 0;
+                    chapterButtons[i].interactable = unlocked;
+                }
+            }
         }
 
         void ShowSettings()
@@ -137,7 +163,6 @@ namespace Tejimola.UI
             pausePanel?.SetActive(false);
             settingsPanel?.SetActive(true);
 
-            // Load current settings
             GameSettings settings = SaveManager.Instance.LoadSettings();
             if (masterVolumeSlider != null) masterVolumeSlider.value = settings.masterVolume;
             if (musicVolumeSlider != null) musicVolumeSlider.value = settings.musicVolume;
@@ -156,34 +181,20 @@ namespace Tejimola.UI
         {
             isPaused = false;
             Time.timeScale = 1f;
-            Hide();
+            HidePanels();
+
+            // Reset relevant game state for clean chapter start
             GameManager.Instance.SetAct(act);
-            SceneLoader.Instance.LoadSceneWithTitle(act.ToString(), FormatActName(act));
+            string sceneName = ActToSceneName(act);
+            SceneLoader.Instance.LoadSceneWithTitle(sceneName, FormatActName(act));
         }
 
         void ReturnToMainMenu()
         {
             isPaused = false;
             Time.timeScale = 1f;
-            Hide();
+            HidePanels();
             SceneLoader.Instance.LoadScene("MainMenu");
-        }
-
-        string FormatActName(GameAct act)
-        {
-            return act switch
-            {
-                GameAct.Act1_HappyHome => "Act I: The Happy Home",
-                GameAct.Act1_Funeral => "Act I: The Funeral",
-                GameAct.Act2_Descent => "Act II: The Descent",
-                GameAct.Act2_Dheki => "Act II: The Dheki",
-                GameAct.Act2_Burial => "Act II: The Burial",
-                GameAct.Act3_DomArrival => "Act III: Spirit Awakens",
-                GameAct.Act3_DualTimeline => "Act III: Dual Timelines",
-                GameAct.Act4_Confrontation => "Act IV: Confrontation",
-                GameAct.Epilogue => "Epilogue",
-                _ => "Tejimola"
-            };
         }
 
         void Show()
@@ -193,11 +204,45 @@ namespace Tejimola.UI
             settingsPanel?.SetActive(false);
         }
 
-        void Hide()
+        void HidePanels()
         {
             pausePanel?.SetActive(false);
             chapterSelectPanel?.SetActive(false);
             settingsPanel?.SetActive(false);
+        }
+
+        string ActToSceneName(GameAct act)
+        {
+            return act switch
+            {
+                GameAct.Act1_HappyHome   => "Act1_HappyHome",
+                GameAct.Act1_Funeral     => "Act1_Funeral",
+                GameAct.Act2_Descent     => "Act2_Descent",
+                GameAct.Act2_Dheki       => "Act2_Dheki",
+                GameAct.Act2_Burial      => "Act2_Burial",
+                GameAct.Act3_DomArrival  => "Act3_DomArrival",
+                GameAct.Act3_DualTimeline => "Act3_DualTimeline",
+                GameAct.Act4_Confrontation => "Act4_Confrontation",
+                GameAct.Epilogue         => "Epilogue",
+                _                        => "MainMenu"
+            };
+        }
+
+        string FormatActName(GameAct act)
+        {
+            return act switch
+            {
+                GameAct.Act1_HappyHome      => "Act I: The Happy Home",
+                GameAct.Act1_Funeral        => "Act I: The Funeral",
+                GameAct.Act2_Descent        => "Act II: The Descent",
+                GameAct.Act2_Dheki          => "Act II: The Dheki",
+                GameAct.Act2_Burial         => "Act II: The Burial",
+                GameAct.Act3_DomArrival     => "Act III: Spirit Awakens",
+                GameAct.Act3_DualTimeline   => "Act III: Dual Timelines",
+                GameAct.Act4_Confrontation  => "Act IV: Confrontation",
+                GameAct.Epilogue            => "Epilogue",
+                _                           => "Tejimola"
+            };
         }
     }
 }

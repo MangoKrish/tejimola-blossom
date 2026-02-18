@@ -173,13 +173,13 @@ namespace Tejimola.Dialogue
             {
                 displayText += fullText[i];
                 OnTextUpdated?.Invoke(displayText);
-                yield return new WaitForSeconds(textSpeed);
+                yield return new WaitForSecondsRealtime(textSpeed); // unscaled — works during pause
             }
 
             isTyping = false;
 
             // Check for choices
-            if (currentEntry.choices != null && currentEntry.choices.Count > 0)
+            if (currentEntry != null && currentEntry.choices != null && currentEntry.choices.Count > 0)
             {
                 waitingForChoice = true;
                 OnChoicesPresented?.Invoke(currentEntry.choices.ToArray());
@@ -192,6 +192,8 @@ namespace Tejimola.Dialogue
                 StopCoroutine(typingCoroutine);
 
             isTyping = false;
+            if (currentEntry == null) return; // guard against race condition
+
             OnTextUpdated?.Invoke(currentEntry.text);
 
             if (currentEntry.choices != null && currentEntry.choices.Count > 0)
@@ -203,6 +205,8 @@ namespace Tejimola.Dialogue
 
         void AdvanceDialogue()
         {
+            if (currentEntry == null) return; // guard against race condition
+
             OnDialogueLineEnded?.Invoke();
 
             if (!string.IsNullOrEmpty(currentEntry.next))

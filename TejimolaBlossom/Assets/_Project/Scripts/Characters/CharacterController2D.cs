@@ -133,6 +133,8 @@ namespace Tejimola.Characters
             isCrouching = !isCrouching;
         }
 
+        public bool IsHiding => isHiding;
+
         public void SetHiding(bool hiding)
         {
             isHiding = hiding;

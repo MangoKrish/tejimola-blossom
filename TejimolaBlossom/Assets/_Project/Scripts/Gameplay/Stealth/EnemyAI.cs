@@ -121,13 +121,8 @@ namespace Tejimola.Gameplay
             if (distance > detectionRadius) return;
 
             // Check if player is hiding
-            if (playerController != null && playerController.GetComponent<CharacterController2D>() != null)
-            {
-                // Player hidden check via sprite alpha
-                var playerSprite = playerTransform.GetComponent<SpriteRenderer>();
-                if (playerSprite != null && playerSprite.color.a < 0.5f)
-                    return; // Player is hidden
-            }
+            if (playerController != null && playerController.IsHiding)
+                return;
 
             // Check line of sight
             Vector2 dirToPlayer = (playerTransform.position - transform.position).normalized;
@@ -185,8 +180,7 @@ namespace Tejimola.Gameplay
             }
 
             // Check if player is hiding
-            var playerSprite = playerTransform.GetComponent<SpriteRenderer>();
-            if (playerSprite != null && playerSprite.color.a < 0.5f)
+            if (playerController != null && playerController.IsHiding)
             {
                 lastKnownPosition = playerTransform.position;
                 SetState(DetectionState.Searching);

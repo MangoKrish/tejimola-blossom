@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Tejimola.Core;
+using Tejimola.UI;
 using Tejimola.Utils;
 
 namespace Tejimola.Gameplay
@@ -66,14 +67,24 @@ namespace Tejimola.Gameplay
         public void StartBossFight()
         {
             isActive = true;
+            currentHealth = maxHealth;
             currentPhase = BossPhase.Phase1_Navigate;
             GameManager.Instance.SetPhase(GamePhase.BossFight);
 
             if (bossMusic != null)
                 AudioManager.Instance.PlayMusic(bossMusic);
 
+            // Wire health bar to HUD
+            var hud = FindFirstObjectByType<Tejimola.UI.GameHUD>();
+            if (hud != null)
+            {
+                OnHealthChanged += hud.UpdateBossHealth;
+                hud.SetBossName("RANIMA");
+            }
+
             EventManager.Instance.Publish<BossPhase>(EventManager.Events.BossPhaseChanged, currentPhase);
             OnPhaseChanged?.Invoke(currentPhase);
+            OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
             StartCoroutine(Phase1Routine());
         }
@@ -269,12 +280,13 @@ namespace Tejimola.Gameplay
         void SpawnVineObstacles()
         {
             if (vineObstaclePrefab == null) return;
+            if (playerTransform == null) return; // guard against null player
 
-            // Spawn vine obstacles in the path
+            Vector3 basePos = playerTransform.position;
             for (int i = 0; i < 3; i++)
             {
-                Vector3 pos = playerTransform.position + new Vector3(Random.Range(-3f, 3f), 0, 0);
-                var vine = Instantiate(vineObstaclePrefab, pos + Vector3.right * (5f + i * 3f), Quaternion.identity);
+                Vector3 offset = new Vector3(Random.Range(-3f, 3f) + 5f + i * 3f, 0, 0);
+                var vine = Instantiate(vineObstaclePrefab, basePos + offset, Quaternion.identity);
                 Destroy(vine, 8f);
             }
         }
@@ -307,6 +319,7 @@ namespace Tejimola.Gameplay
 
         void DefeatBoss()
         {
+            if (!isActive) return; // prevent double-call
             isActive = false;
 
             // Per doc: barrel rolls at boss, doesn't cause harm to player directly
