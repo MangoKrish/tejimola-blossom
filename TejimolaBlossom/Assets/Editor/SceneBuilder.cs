@@ -322,16 +322,36 @@ public static class SceneBuilder
             cameraMaxX: 12f,
             ambientColor: GameColors.Gold);
 
-        // Interactable objects for Act 1 exploration
+        // ── Platforms for exploration ──
+        CreatePlatform("Platform_Porch",   new Vector3(-6f,  -1.5f, 0), 5f,  0.5f, GameColors.EarthBrown);
+        CreatePlatform("Platform_Garden",  new Vector3( 3f,  -1.5f, 0), 6f,  0.5f, new Color(0.3f, 0.5f, 0.2f));
+        CreatePlatform("Platform_Roof",    new Vector3( 7f,   0.5f, 0), 4f,  0.4f, new Color(0.6f, 0.4f, 0.2f));
+        CreatePlatform("Platform_Step1",   new Vector3(-2f,  -1.8f, 0), 2f,  0.3f, GameColors.EarthBrown);
+        CreatePlatform("Platform_WellArea",new Vector3(-9f,  -1.5f, 0), 4f,  0.5f, new Color(0.5f, 0.5f, 0.6f));
+
+        // ── Interactable objects ──
         var items = new (string name, string sprite, Vector3 pos, string dialogue, string itemId)[]
         {
-            ("Kitchen",      "Sprites/Props/pot.png",         new Vector3(-4f, -1.5f, 0), "act1_kitchen",  ""),
-            ("Bedroom",      "Sprites/Props/gamosa.png",      new Vector3(0f,  -1.5f, 0), "act1_bedroom",  ""),
-            ("NahorTree",    "Sprites/Props/nahor_flower.png",new Vector3(5f,  -1f,   0), "act1_explore_home",""),
-            ("Hairpin",      "Sprites/Props/hairpin.png",     new Vector3(3f,  -2f,   0), "act1_explore_home","hairpin"),
+            ("Kitchen",      "Sprites/Props/pot.png",          new Vector3(-5f, -1.0f, 0), "act1_kitchen",     ""),
+            ("Bedroom",      "Sprites/Props/gamosa.png",       new Vector3(0f,  -1.0f, 0), "act1_bedroom",     ""),
+            ("NahorTree",    "Sprites/Props/nahor_flower.png", new Vector3(6f,  -1.0f, 0), "act1_explore_home",""),
+            ("Hairpin",      "Sprites/Props/hairpin.png",      new Vector3(3f,  -2.0f, 0), "act1_explore_home","hairpin"),
+            ("OilLamp",      "Sprites/Props/oil_lamp.png",     new Vector3(-8f, -1.0f, 0), "act1_explore_home",""),
+            ("WaterPot",     "Sprites/Props/gourd.png",        new Vector3(-9f, -1.0f, 0), "act1_kitchen",     ""),
         };
         foreach (var item in items)
             CreateInteractable(item.name, item.sprite, item.pos, item.dialogue, item.itemId, item.itemId != "");
+
+        // ── Father NPC ──
+        var fatherGO = new GameObject("Father_NPC");
+        var fSR = fatherGO.AddComponent<SpriteRenderer>();
+        fSR.sprite = Spr("Sprites/Characters/father_spritesheet.png");
+        fSR.sortingOrder = 2;
+        fatherGO.transform.position = new Vector3(-7f, -2.0f, 0);
+        fatherGO.layer = L_Interactable;
+        fatherGO.AddComponent<BoxCollider2D>().isTrigger = true;
+        var fIA = fatherGO.AddComponent<Tejimola.Characters.Interactable>();
+        SetSOs(fIA, "dialogueId", "act1_explore_home");
     }
 
     // ═══════════════════════════════════════════════════════════
@@ -349,9 +369,37 @@ public static class SceneBuilder
             cameraMaxX: 8f,
             ambientColor: new Color(0.7f, 0.7f, 0.8f));
 
-        // A simple river sprite and elder NPC
-        CreateInteractable("VillageElder", "Sprites/Characters/father_portrait.png",
-            new Vector3(2f, -1.5f, 0), "act1_funeral", "", false);
+        // ── Elevated platforms – funeral procession path ──
+        CreatePlatform("Platform_RiverBank",   new Vector3(-4f, -1.5f, 0), 6f, 0.5f, new Color(0.4f, 0.5f, 0.4f));
+        CreatePlatform("Platform_CremationMound", new Vector3(4f, -0.5f, 0), 4f, 0.5f, new Color(0.5f, 0.4f, 0.3f));
+        CreatePlatform("Platform_GraveSide",   new Vector3(7f,  -1.8f, 0), 3f, 0.3f, new Color(0.3f, 0.35f, 0.3f));
+
+        // ── Nahor seedling ──
+        var seedGO = new GameObject("NahorSeedling");
+        var seedSR = seedGO.AddComponent<SpriteRenderer>();
+        seedSR.sprite = Spr("Sprites/Props/nahor_flower.png");
+        seedSR.sortingOrder = 2;
+        seedGO.transform.position = new Vector3(5f, -1.5f, 0);
+        seedGO.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+
+        // ── Ranima introduction ──
+        var ranimaGO = new GameObject("Ranima_Intro");
+        var ranimaSR = ranimaGO.AddComponent<SpriteRenderer>();
+        ranimaSR.sprite = Spr("Sprites/Characters/ranima_spritesheet.png");
+        ranimaSR.sortingOrder = 2;
+        ranimaGO.transform.position = new Vector3(6f, -2.0f, 0);
+        ranimaGO.layer = L_Interactable;
+        ranimaGO.AddComponent<BoxCollider2D>().isTrigger = true;
+        var rIA = ranimaGO.AddComponent<Tejimola.Characters.Interactable>();
+        SetSOs(rIA, "dialogueId", "act1_ranima_intro");
+
+        // ── Village elder NPC ──
+        CreateInteractable("VillageElder", "Sprites/Characters/father_spritesheet.png",
+            new Vector3(-2f, -2.0f, 0), "act1_funeral", "", false);
+
+        // ── Memorial pot ──
+        CreateInteractable("MemorialPot", "Sprites/Props/pot.png",
+            new Vector3(0f, -2.0f, 0), "act1_funeral", "", false);
     }
 
     // ═══════════════════════════════════════════════════════════
@@ -410,9 +458,20 @@ public static class SceneBuilder
         SetSOi(enemy, "playerLayer",   1 << L_Player);
         SetSOi(enemy, "obstacleLayer", 1 << L_Obstacle);
 
-        // Hiding spots
-        CreateHidingSpot("HidingSpot_Cabinet", new Vector3(-3f, -1.8f, 0));
-        CreateHidingSpot("HidingSpot_Curtain",  new Vector3(0f,  -1.8f, 0));
+        // ── Platforms ──
+        CreatePlatform("Platform_Storage", new Vector3(-4f, -1.5f, 0), 4f, 0.4f, new Color(0.35f, 0.25f, 0.2f));
+        CreatePlatform("Platform_Ledge",   new Vector3( 3f, -0.5f, 0), 3f, 0.4f, new Color(0.3f, 0.3f, 0.35f));
+        CreatePlatform("Platform_Exit",    new Vector3( 8f, -1.5f, 0), 3f, 0.4f, new Color(0.3f, 0.3f, 0.25f));
+
+        // ── Hiding spots ──
+        CreateHidingSpot("HidingSpot_Cabinet",  new Vector3(-3f, -1.8f, 0));
+        CreateHidingSpot("HidingSpot_Curtain",  new Vector3( 0f, -1.8f, 0));
+        CreateHidingSpot("HidingSpot_Barrel",   new Vector3( 5f, -1.8f, 0));
+        CreateHidingSpot("HidingSpot_Shadow",   new Vector3(-7f, -1.8f, 0));
+
+        // ── Extra patrol points for longer route ──
+        var p3 = new GameObject("PatrolPoint3"); p3.transform.position = new Vector3(-8f, -1.5f, 0);
+        var p4 = new GameObject("PatrolPoint4"); p4.transform.position = new Vector3( 8f, -1.5f, 0);
 
         // Wire StealthManager
         var player = GameObject.Find("Player_Tejimola");
@@ -440,6 +499,10 @@ public static class SceneBuilder
             cameraMaxX: 5f,
             ambientColor: new Color(0.5f, 0.4f, 0.3f));
 
+        // ── Platforms in dheki area ──
+        CreatePlatform("Platform_DhekiBase", new Vector3(0f,  -1.5f, 0), 5f, 0.5f, new Color(0.4f, 0.3f, 0.2f));
+        CreatePlatform("Platform_Rest",      new Vector3(-4f, -1.5f, 0), 3f, 0.4f, GameColors.EarthBrown);
+
         // Dheki prop
         var dhekiGO = new GameObject("Dheki");
         var dhekiSR = dhekiGO.AddComponent<SpriteRenderer>();
@@ -451,6 +514,10 @@ public static class SceneBuilder
         // RhythmEngine
         var rhythmGO = new GameObject("RhythmEngine");
         var rhythm   = rhythmGO.AddComponent<RhythmEngine>();
+        SetSO(rhythm,  "dhekiHitSound",  Clip("SFX/beat_hit_perfect"));
+        SetSO(rhythm,  "dhekiMissSound", Clip("SFX/beat_miss"));
+        SetSO(rhythm,  "heartbeatSound", Clip("SFX/heartbeat"));
+        SetSO(rhythm,  "musicTrack",     Clip("Music/act2_dheki"));
 
         // Rhythm UI Canvas
         var rythmCvs = MakeWorldCanvas("RhythmUICanvas", sortOrder: 10);
@@ -521,13 +588,49 @@ public static class SceneBuilder
             cameraMaxX: 5f,
             ambientColor: new Color(0.1f, 0.1f, 0.15f));
 
-        // Nahor tree - central element
+        // ── Burial ground platforms ──
+        CreatePlatform("Platform_Mound",    new Vector3( 0f, -1.5f, 0), 5f, 0.6f, new Color(0.35f, 0.3f, 0.25f));
+        CreatePlatform("Platform_Approach", new Vector3(-4f, -2.0f, 0), 3f, 0.4f, new Color(0.3f, 0.3f, 0.3f));
+
+        // ── Nahor tree – central element ──
         var treeGO = new GameObject("NahorTree_Burial");
         var treeSR = treeGO.AddComponent<SpriteRenderer>();
         treeSR.sprite = Spr("Sprites/Props/nahor_flower.png");
         treeSR.sortingOrder = 2;
         treeGO.transform.position = new Vector3(0, 0, 0);
         treeGO.transform.localScale = new Vector3(3, 3, 1);
+        treeGO.layer = L_Interactable;
+        treeGO.AddComponent<BoxCollider2D>().isTrigger = true;
+        var treeIA = treeGO.AddComponent<Tejimola.Characters.Interactable>();
+        SetSOs(treeIA, "dialogueId", "act2_burial");
+
+        // ── Burial items ──
+        var potGO = new GameObject("Burial_Pot");
+        var potSR = potGO.AddComponent<SpriteRenderer>();
+        potSR.sprite = Spr("Sprites/Props/pot.png");
+        potSR.sortingOrder = 2;
+        potGO.transform.position = new Vector3(-2f, -2.0f, 0);
+
+        var gamosaGO = new GameObject("Burial_Gamosa");
+        var gamosaSR = gamosaGO.AddComponent<SpriteRenderer>();
+        gamosaSR.sprite = Spr("Sprites/Props/gamosa.png");
+        gamosaSR.sortingOrder = 2;
+        gamosaGO.transform.position = new Vector3(2f, -2.0f, 0);
+
+        // ── Rain particle effect (atmosphere) ──
+        var rainGO = new GameObject("RainEffect");
+        var rainPS = rainGO.AddComponent<ParticleSystem>();
+        var rm = rainPS.main;
+        rm.startColor    = new ParticleSystem.MinMaxGradient(new Color(0.5f, 0.6f, 0.9f, 0.4f));
+        rm.startSize     = 0.05f;
+        rm.startLifetime = 2f;
+        rm.startSpeed    = 8f;
+        rm.maxParticles  = 200;
+        var rShape = rainPS.shape;
+        rShape.enabled     = true;
+        rShape.shapeType   = ParticleSystemShapeType.Box;
+        rShape.scale       = new Vector3(20f, 0.1f, 1f);
+        rainGO.transform.position = new Vector3(0, 6f, 0);
     }
 
     // ═══════════════════════════════════════════════════════════
@@ -545,18 +648,49 @@ public static class SceneBuilder
             cameraMaxX: 10f,
             ambientColor: new Color(0.3f, 0.2f, 0.4f));
 
-        // Spirit-revealable objects
-        CreateSpiritRevealable("TejimolaSpiritEcho", "Sprites/Characters/tejimola_spirit_spritesheet.png",
-            new Vector3(3f, -1f, 0), "echo_1", false);
-        CreateSpiritRevealable("NahorTreeSpirit", "Sprites/Props/nahor_flower.png",
-            new Vector3(5f, 0f, 0), "nahor_spirit", true);
+        // ── Platforms in ruined village ──
+        CreatePlatform("Platform_Ruins1",  new Vector3(-6f,  -1.5f, 0), 4f, 0.4f, new Color(0.4f, 0.4f, 0.5f));
+        CreatePlatform("Platform_Ruins2",  new Vector3( 2f,  -1.0f, 0), 3f, 0.4f, new Color(0.4f, 0.4f, 0.5f));
+        CreatePlatform("Platform_Ruins3",  new Vector3( 7f,  -0.5f, 0), 3f, 0.4f, new Color(0.35f, 0.35f, 0.45f));
+        CreatePlatform("Platform_Path",    new Vector3(-2f,  -1.8f, 0), 3f, 0.3f, new Color(0.3f, 0.3f, 0.35f));
 
-        // Drum prop
+        // ── Spirit-revealable memories ──
+        CreateSpiritRevealable("TejimolaSpiritEcho", "Sprites/Characters/tejimola_spirit_spritesheet.png",
+            new Vector3(3f,  -1f, 0), "echo_1", false);
+        CreateSpiritRevealable("NahorTreeSpirit",    "Sprites/Props/nahor_flower.png",
+            new Vector3(5f,   0f, 0), "nahor_spirit", true);
+        CreateSpiritRevealable("MemoryOfFather",     "Sprites/Characters/father_spritesheet.png",
+            new Vector3(-5f, -1f, 0), "echo_2", false);
+        CreateSpiritRevealable("MemoryOfHome",       "Sprites/Props/pot.png",
+            new Vector3( 7f, -0.2f, 0), "echo_3", false);
+
+        // ── Spirit orbs to collect ──
+        CreateSpiritOrb("Orb_1", new Vector3(-4f,  0f, 0));
+        CreateSpiritOrb("Orb_2", new Vector3( 1f,  0.5f, 0));
+        CreateSpiritOrb("Orb_3", new Vector3( 6f,  0.5f, 0));
+
+        // ── Drum prop (Dom's instrument) ──
         var drumGO = new GameObject("DholDrum");
         var drumSR = drumGO.AddComponent<SpriteRenderer>();
         drumSR.sprite       = Spr("Sprites/Props/dhol_drum.png");
         drumSR.sortingOrder = 1;
         drumGO.transform.position = new Vector3(-3f, -2f, 0);
+        drumGO.layer = L_Interactable;
+        drumGO.AddComponent<BoxCollider2D>().isTrigger = true;
+        var drumIA = drumGO.AddComponent<Tejimola.Characters.Interactable>();
+        SetSOs(drumIA, "dialogueId", "act3_first_encounter");
+
+        // ── Tejimola spirit manifestation ──
+        var spiritGO = new GameObject("Tejimola_Spirit");
+        var spiritSR = spiritGO.AddComponent<SpriteRenderer>();
+        spiritSR.sprite = Spr("Sprites/Characters/tejimola_spirit_spritesheet.png");
+        spiritSR.sortingOrder = 3;
+        spiritSR.color = new Color(0.7f, 0.8f, 1f, 0.6f);
+        spiritGO.transform.position = new Vector3(8f, -1.5f, 0);
+        spiritGO.layer = L_Interactable;
+        spiritGO.AddComponent<BoxCollider2D>().isTrigger = true;
+        var spiritIA = spiritGO.AddComponent<Tejimola.Characters.Interactable>();
+        SetSOs(spiritIA, "dialogueId", "act3_first_encounter");
     }
 
     // ═══════════════════════════════════════════════════════════
@@ -632,6 +766,17 @@ public static class SceneBuilder
             puzzleProp.GetArrayElementAtIndex(i).objectReferenceValue = puzzleList[i];
         pmSO.ApplyModifiedProperties();
 
+        // ── Platforms between puzzles ──
+        CreatePlatform("Platform_Puzzle_Left",   new Vector3(-10f, -1.5f, 0), 5f, 0.4f, new Color(0.3f, 0.25f, 0.4f));
+        CreatePlatform("Platform_Puzzle_Center",  new Vector3(-1f,  -1.0f, 0), 4f, 0.4f, new Color(0.3f, 0.25f, 0.4f));
+        CreatePlatform("Platform_Puzzle_Right",   new Vector3( 6f,  -0.5f, 0), 4f, 0.4f, new Color(0.3f, 0.25f, 0.4f));
+        CreatePlatform("Platform_Puzzle_Far",     new Vector3(11f,  -1.5f, 0), 3f, 0.4f, new Color(0.25f, 0.2f, 0.35f));
+
+        // ── Spirit orbs as collectibles near puzzles ──
+        CreateSpiritOrb("Orb_DualA", new Vector3(-6f, 0.5f, 0));
+        CreateSpiritOrb("Orb_DualB", new Vector3( 2f, 0.5f, 0));
+        CreateSpiritOrb("Orb_DualC", new Vector3( 9f, 0.5f, 0));
+
         // SceneSetup
         var setupGO = new GameObject("SceneSetup");
         var setup   = setupGO.AddComponent<Act3DualTimelineSetup>();
@@ -691,6 +836,12 @@ public static class SceneBuilder
         main.startSpeed     = 2f;
         main.maxParticles   = 50;
 
+        // Wire BossController audio
+        SetSO(bossCtrl, "bossMusic",           Clip("Music/act4_boss"));
+        SetSO(bossCtrl, "phaseTransitionSound", Clip("SFX/phase_transition"));
+        SetSO(bossCtrl, "hitSound",             Clip("SFX/boss_hit"));
+        SetSO(bossCtrl, "defeatSound",          Clip("SFX/boss_defeat"));
+
         // Wire BossController
         var bso = new SerializedObject(bossCtrl);
         var spawnProp = bso.FindProperty("obstacleSpawnPoints");
@@ -721,7 +872,7 @@ public static class SceneBuilder
     static void BuildEpilogue()
     {
         BuildStandardGameplayScene(
-            actFolder:  "Act4",    // reuse Act4 art for epilogue
+            actFolder:  "Epilogue",
             character:  "Dom",
             setupType:  typeof(EpilogueSetup),
             groundY:    -2.5f,
@@ -729,7 +880,11 @@ public static class SceneBuilder
             cameraMaxX: 5f,
             ambientColor: new Color(1f, 0.9f, 0.7f));
 
-        // Blooming nahor tree
+        // ── Platforms – peaceful dawn ──
+        CreatePlatform("Platform_Shore",  new Vector3(-3f, -1.5f, 0), 4f, 0.4f, new Color(0.5f, 0.6f, 0.4f));
+        CreatePlatform("Platform_Hill",   new Vector3( 4f, -0.5f, 0), 4f, 0.4f, new Color(0.4f, 0.55f, 0.35f));
+
+        // ── Blooming nahor tree (central focus) ──
         var treeGO = new GameObject("NahorTree_Blooming");
         var treeSR = treeGO.AddComponent<SpriteRenderer>();
         treeSR.sprite = Spr("Sprites/Props/nahor_flower.png");
@@ -738,13 +893,42 @@ public static class SceneBuilder
         treeGO.transform.position = new Vector3(0, 0, 0);
         treeGO.transform.localScale = new Vector3(4, 4, 1);
 
-        // Tejimola spirit
+        // ── Tejimola spirit (final form) ──
         var spiritGO = new GameObject("TejimolaSpiritFinal");
         var spiritSR = spiritGO.AddComponent<SpriteRenderer>();
         spiritSR.sprite = Spr("Sprites/Characters/tejimola_spirit_spritesheet.png");
         spiritSR.sortingOrder = 5;
-        spiritSR.color  = new Color(1f, 1f, 1f, 0.8f);
+        spiritSR.color  = new Color(1f, 1f, 1f, 0.9f);
         spiritGO.transform.position = new Vector3(2f, -1f, 0);
+        spiritGO.layer = L_Interactable;
+        spiritGO.AddComponent<BoxCollider2D>().isTrigger = true;
+        var spiritIAE = spiritGO.AddComponent<Tejimola.Characters.Interactable>();
+        SetSOs(spiritIAE, "dialogueId", "epilogue_sunrise");
+
+        // ── Flowers scattered around ──
+        var flowerPositions = new Vector3[]
+        {
+            new Vector3(-5f, -2.3f, 0), new Vector3(-3f, -2.3f, 0),
+            new Vector3( 1f, -2.3f, 0), new Vector3( 3f, -2.3f, 0),
+            new Vector3( 5f, -2.3f, 0),
+        };
+        for (int fi = 0; fi < flowerPositions.Length; fi++)
+        {
+            var fGO = new GameObject($"Flower_{fi}");
+            var fSR = fGO.AddComponent<SpriteRenderer>();
+            fSR.sprite = Spr("Sprites/Props/nahor_flower.png");
+            fSR.sortingOrder = 1;
+            fSR.color = new Color(1f, 0.9f, 0.5f, 0.8f);
+            fGO.transform.position = flowerPositions[fi];
+            fGO.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
+        }
+
+        // ── Gamosa cloth (father's memory) ──
+        var gamosaGO = new GameObject("Gamosa_Memorial");
+        var gamosaSR = gamosaGO.AddComponent<SpriteRenderer>();
+        gamosaSR.sprite = Spr("Sprites/Props/gamosa.png");
+        gamosaSR.sortingOrder = 2;
+        gamosaGO.transform.position = new Vector3(-4f, -2f, 0);
     }
 
     // ═══════════════════════════════════════════════════════════
@@ -1084,7 +1268,6 @@ public static class SceneBuilder
         var domPortrait      = Spr("Sprites/Characters/dom_portrait.png");
         var fatherPortrait   = Spr("Sprites/Characters/father_portrait.png");
         var ranimaPortrait   = Spr("Sprites/Characters/ranima_portrait.png");
-        var ranimaCorPortrait= Spr("Sprites/Characters/ranima_corrupted_portrait.png");
 
         // Wire DialogueBoxUI
         var dlgUI = dlgPanel.AddComponent<Tejimola.UI.DialogueBoxUI>();
@@ -1103,6 +1286,11 @@ public static class SceneBuilder
         dso.FindProperty("domPortrait").objectReferenceValue         = domPortrait;
         dso.FindProperty("fatherPortrait").objectReferenceValue      = fatherPortrait;
         dso.FindProperty("ranimaPortrait").objectReferenceValue      = ranimaPortrait;
+        // elder and narrator use father portrait and a null (shown as blank) respectively
+        var epFather = dso.FindProperty("elderPortrait");
+        if (epFather != null) epFather.objectReferenceValue = fatherPortrait;
+        var epNarr = dso.FindProperty("narratorPortrait");
+        if (epNarr != null) epNarr.objectReferenceValue = tejiPortrait;
         var cbProp = dso.FindProperty("choiceButtons");
         cbProp.arraySize = 4;
         var ctProp = dso.FindProperty("choiceTexts");
@@ -1361,6 +1549,42 @@ public static class SceneBuilder
         col.size = new Vector2(w, h);
     }
 
+    static void CreatePlatform(string name, Vector3 pos, float width, float height, Color color)
+    {
+        var go = new GameObject(name);
+        go.layer = L_Ground;
+        go.transform.position = pos;
+
+        var sr = go.AddComponent<SpriteRenderer>();
+        sr.sprite       = CreateColoredSprite(color);
+        sr.sortingOrder = -2;
+        go.transform.localScale = new Vector3(width, height, 1f);
+
+        go.AddComponent<BoxCollider2D>();
+    }
+
+    static void CreateSpiritOrb(string name, Vector3 pos)
+    {
+        var go = new GameObject(name);
+        go.layer = L_Interactable;
+        go.transform.position = pos;
+
+        var sr = go.AddComponent<SpriteRenderer>();
+        sr.sprite       = Spr("Sprites/Props/spirit_orb.png");
+        sr.sortingOrder = 4;
+        sr.color        = new Color(0.5f, 0.3f, 1f, 0.9f);
+        go.transform.localScale = new Vector3(0.6f, 0.6f, 1f);
+
+        var col = go.AddComponent<CircleCollider2D>();
+        col.isTrigger = true;
+        col.radius    = 0.5f;
+
+        var ia = go.AddComponent<Tejimola.Characters.Interactable>();
+        SetSOs(ia, "itemId",       "spirit_orb");
+        SetSOb(ia, "isCollectible", true);
+        SetSOb(ia, "oneTimeUse",    true);
+    }
+
     // ═══════════════════════════════════════════════════════════
     //  UI FACTORY HELPERS
     // ═══════════════════════════════════════════════════════════
@@ -1567,6 +1791,21 @@ public static class SceneBuilder
         if (sprite == null)
             Debug.LogWarning($"[SceneBuilder] Sprite not found: {ART}/{relPath}");
         return sprite;
+    }
+
+    const string RESOURCES_AUDIO = "Assets/_Project/Resources/Audio";
+
+    static AudioClip Clip(string relPath)
+    {
+        // Try with common extensions
+        string[] exts = { ".wav", ".mp3", ".ogg" };
+        foreach (var ext in exts)
+        {
+            var c = AssetDatabase.LoadAssetAtPath<AudioClip>($"{RESOURCES_AUDIO}/{relPath}{ext}");
+            if (c != null) return c;
+        }
+        Debug.LogWarning($"[SceneBuilder] AudioClip not found: {RESOURCES_AUDIO}/{relPath}");
+        return null;
     }
 
     static Sprite CreateColoredSprite(Color color)

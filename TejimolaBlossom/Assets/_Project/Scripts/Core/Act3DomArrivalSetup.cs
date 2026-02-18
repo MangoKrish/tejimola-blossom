@@ -20,6 +20,18 @@ namespace Tejimola.Scenes
         protected override void OnSceneReady()
         {
             SaveManager.Instance.SaveGame();
+            EventManager.Instance.Subscribe(EventManager.Events.DialogueEnded, OnFirstEncounterEnded);
+        }
+
+        void OnFirstEncounterEnded()
+        {
+            EventManager.Instance.Unsubscribe(EventManager.Events.DialogueEnded, OnFirstEncounterEnded);
+            Invoke(nameof(GoToDualTimeline), 2f);
+        }
+
+        void GoToDualTimeline()
+        {
+            SceneLoader.Instance.LoadSceneWithTitle("Act3_DualTimeline", "THE MEMORIES", 2f);
         }
     }
 }

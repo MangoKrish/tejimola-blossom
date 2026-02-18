@@ -23,6 +23,7 @@ namespace Tejimola.Scenes
         protected override void OnSceneReady()
         {
             EventManager.Instance.Subscribe(EventManager.Events.DialogueEnded, StartStealthPhase);
+            EventManager.Instance.Subscribe(EventManager.Events.StealthComplete, OnStealthComplete);
         }
 
         void StartStealthPhase()
@@ -31,6 +32,12 @@ namespace Tejimola.Scenes
             if (stealthManager != null)
                 stealthManager.StartStealth();
             EventManager.Instance.Publish<string>(EventManager.Events.ObjectiveUpdated, "Avoid Ranima. Hide when she approaches.");
+        }
+
+        void OnStealthComplete()
+        {
+            EventManager.Instance.Unsubscribe(EventManager.Events.StealthComplete, OnStealthComplete);
+            SceneLoader.Instance.LoadSceneWithTitle("Act2_Dheki", "THE DHEKI", 2f);
         }
     }
 }

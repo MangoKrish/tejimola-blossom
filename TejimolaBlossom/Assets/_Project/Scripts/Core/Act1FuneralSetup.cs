@@ -16,5 +16,21 @@ namespace Tejimola.Scenes
             ambientIntensity = 0.8f;
             base.Start();
         }
+
+        protected override void OnSceneReady()
+        {
+            EventManager.Instance.Subscribe(EventManager.Events.DialogueEnded, OnFuneralDialogueEnded);
+        }
+
+        void OnFuneralDialogueEnded()
+        {
+            EventManager.Instance.Unsubscribe(EventManager.Events.DialogueEnded, OnFuneralDialogueEnded);
+            Invoke(nameof(GoToAct2), 2f);
+        }
+
+        void GoToAct2()
+        {
+            SceneLoader.Instance.LoadSceneWithTitle("Act2_Descent", "ACT II: THE DESCENT", 3f);
+        }
     }
 }

@@ -20,6 +20,17 @@ namespace Tejimola.Scenes
         protected override void OnSceneReady()
         {
             SaveManager.Instance.SaveGame();
+            EventManager.Instance.Subscribe(EventManager.Events.DialogueEnded, OnDialogueEnded);
+        }
+
+        void OnDialogueEnded()
+        {
+            // After ranima_intro dialogue, transition to the funeral
+            if (GameManager.Instance.CollectedItems.Contains("hairpin"))
+            {
+                EventManager.Instance.Unsubscribe(EventManager.Events.DialogueEnded, OnDialogueEnded);
+                SceneLoader.Instance.LoadSceneWithTitle("Act1_Funeral", "THE PASSING", 2f);
+            }
         }
     }
 }

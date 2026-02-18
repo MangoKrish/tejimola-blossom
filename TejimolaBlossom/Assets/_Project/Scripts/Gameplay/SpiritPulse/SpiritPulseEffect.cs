@@ -27,8 +27,9 @@ namespace Tejimola.Gameplay
                 ringRenderer = gameObject.AddComponent<SpriteRenderer>();
             }
 
-            // Use a circle sprite - we'll generate this procedurally
-            ringRenderer.sprite = CreateRingSprite();
+            // Only generate a sprite if none is already assigned (avoid texture leak)
+            if (ringRenderer.sprite == null)
+                ringRenderer.sprite = CreateRingSprite();
             ringRenderer.color = new Color(GameColors.SpiritPurple.r, GameColors.SpiritPurple.g, GameColors.SpiritPurple.b, 0.6f);
             ringRenderer.sortingOrder = 100;
 

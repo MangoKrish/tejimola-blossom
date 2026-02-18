@@ -15,7 +15,7 @@ namespace Tejimola.Gameplay
 
         public int SolvedCount => solvedCount;
         public int TotalPuzzles => puzzles.Count;
-        public bool AllSolved => solvedCount >= GameConstants.TotalPuzzles;
+        public bool AllSolved => puzzles.Count > 0 && solvedCount >= puzzles.Count;
 
         void Start()
         {

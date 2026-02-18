@@ -40,6 +40,7 @@ namespace Tejimola.UI
             SetupTitle();
             CheckContinueButton();
             LoadSettings();
+            AudioManager.Instance.PlayMusic("Audio/Music/menu", 1f);
         }
 
         void SetupTitle()

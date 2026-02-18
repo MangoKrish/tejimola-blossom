@@ -24,6 +24,7 @@ namespace Tejimola.Scenes
         protected override void OnSceneReady()
         {
             EventManager.Instance.Subscribe(EventManager.Events.DialogueEnded, StartRhythmSequence);
+            EventManager.Instance.Subscribe(EventManager.Events.RhythmEnded, OnRhythmEnded);
         }
 
         void StartRhythmSequence()
@@ -36,6 +37,17 @@ namespace Tejimola.Scenes
 
             if (rhythmEngine != null)
                 rhythmEngine.StartRhythmSequence();
+        }
+
+        void OnRhythmEnded()
+        {
+            EventManager.Instance.Unsubscribe(EventManager.Events.RhythmEnded, OnRhythmEnded);
+            Invoke(nameof(GoToBurial), 2f);
+        }
+
+        void GoToBurial()
+        {
+            SceneLoader.Instance.LoadSceneWithTitle("Act2_Burial", "THE BURIAL", 2f);
         }
     }
 }

@@ -58,6 +58,9 @@ namespace Tejimola.Camera
 
             transform.position = Vector3.Lerp(transform.position, targetPos, followSpeed * Time.deltaTime);
 
+            // Capture pre-shake position for accurate parallax delta
+            Vector3 preShakedPos = transform.position;
+
             // Apply screen shake
             if (shakeTimer > 0)
             {
@@ -67,10 +70,10 @@ namespace Tejimola.Camera
                 shakeIntensity = Mathf.Lerp(shakeIntensity, 0, Time.deltaTime * 5f);
             }
 
-            // Update parallax
-            Vector3 deltaMovement = transform.position - lastPosition;
+            // Update parallax using pre-shake delta so shake doesn't jitter backgrounds
+            Vector3 deltaMovement = preShakedPos - lastPosition;
             UpdateParallax(deltaMovement);
-            lastPosition = transform.position;
+            lastPosition = preShakedPos;
         }
 
         void UpdateParallax(Vector3 delta)

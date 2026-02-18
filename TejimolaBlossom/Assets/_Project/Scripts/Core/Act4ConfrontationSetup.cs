@@ -23,6 +23,7 @@ namespace Tejimola.Scenes
         protected override void OnSceneReady()
         {
             EventManager.Instance.Subscribe(EventManager.Events.DialogueEnded, StartBossFight);
+            EventManager.Instance.Subscribe(EventManager.Events.BossDefeated, OnBossDefeated);
             SaveManager.Instance.SaveGame();
         }
 
@@ -31,6 +32,20 @@ namespace Tejimola.Scenes
             EventManager.Instance.Unsubscribe(EventManager.Events.DialogueEnded, StartBossFight);
             if (bossController != null)
                 bossController.StartBossFight();
+        }
+
+        void OnBossDefeated()
+        {
+            EventManager.Instance.Unsubscribe(EventManager.Events.BossDefeated, OnBossDefeated);
+            // Play defeat dialogue then go to epilogue
+            EventManager.Instance.Publish<string>(EventManager.Events.DialogueStarted, "act4_defeat");
+            EventManager.Instance.Subscribe(EventManager.Events.DialogueEnded, GoToEpilogue);
+        }
+
+        void GoToEpilogue()
+        {
+            EventManager.Instance.Unsubscribe(EventManager.Events.DialogueEnded, GoToEpilogue);
+            SceneLoader.Instance.LoadSceneWithTitle("Epilogue", "EPILOGUE", 3f);
         }
     }
 }
