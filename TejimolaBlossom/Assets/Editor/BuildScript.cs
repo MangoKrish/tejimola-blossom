@@ -42,14 +42,22 @@ public class BuildScript
     }
 
     // Called from command line via -executeMethod BuildScript.BatchBuildAll
-    // Builds all scenes first, then compiles the .exe
+    // Step 1: Build all scenes (includes animation setup)
+    // Step 2: Validate scenes
+    // Step 3: Compile Windows .exe
     public static void BatchBuildAll()
     {
         try
         {
-            Debug.Log("=== Step 1/2: Building all game scenes ===");
+            Debug.Log("=== Step 1/3: Building all game scenes (+ animations) ===");
             SceneBuilder.BuildAllScenesBatch();
-            Debug.Log("=== Step 2/2: Compiling Windows .exe ===");
+
+            Debug.Log("=== Step 2/3: Validating scenes ===");
+            int validationErrors = SceneValidator.ValidateAllScenesBatch();
+            if (validationErrors > 0)
+                Debug.LogWarning($"Validation found {validationErrors} error(s) — build continues.");
+
+            Debug.Log("=== Step 3/3: Compiling Windows .exe ===");
             BuildWindows();
             EditorApplication.Exit(0);
         }

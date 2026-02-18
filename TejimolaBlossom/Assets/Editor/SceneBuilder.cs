@@ -67,6 +67,9 @@ public static class SceneBuilder
             Directory.CreateDirectory(PREFABS);
             CreateAnimatorControllers();
 
+            Debug.Log("[SceneBuilder] Setting up animation clips…");
+            AnimationSetup.SetupAnimationsBatch();
+
             BuildScene("MainMenu",             BuildMainMenu);
             BuildScene("Act1_HappyHome",       BuildAct1HappyHome);
             BuildScene("Act1_Funeral",         BuildAct1Funeral);
@@ -1596,20 +1599,4 @@ public static class SceneBuilder
         Debug.Log("[SceneBuilder] Build Settings updated with all 10 scenes.");
     }
 
-    // ── Act 2 Burial SceneSetup placeholder ────────────────────
-    // (No Act2BurialSetup exists – the base SceneSetup handles it)
-
-    class Act2BurialSetup : Tejimola.Scenes.SceneSetup
-    {
-        protected override void Start()
-        {
-            sceneAct             = GameAct.Act2_Burial;
-            dialogueFile         = "act2_dialogue";
-            openingConversationId= "act2_burial";
-            objectiveText        = "";
-            ambientColor         = new Color(0.1f, 0.1f, 0.15f);
-            ambientIntensity     = 0.5f;
-            base.Start();
-        }
-    }
 }

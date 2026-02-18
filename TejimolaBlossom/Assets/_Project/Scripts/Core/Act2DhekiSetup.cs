@@ -1,0 +1,34 @@
+using UnityEngine;
+using Tejimola.Core;
+using Tejimola.Gameplay;
+
+namespace Tejimola.Scenes
+{
+    public class Act2DhekiSetup : SceneSetup
+    {
+        [SerializeField] private RhythmEngine rhythmEngine;
+
+        protected override void Start()
+        {
+            sceneAct = GameAct.Act2_Dheki;
+            dialogueFile = "act2_dialogue";
+            openingConversationId = "act2_dheki_intro";
+            objectiveText = "Work the dheki";
+            ambientColor = new Color(0.5f, 0.4f, 0.3f);
+            ambientIntensity = 0.7f;
+            base.Start();
+        }
+
+        protected override void OnSceneReady()
+        {
+            EventManager.Instance.Subscribe(EventManager.Events.DialogueEnded, StartRhythmSequence);
+        }
+
+        void StartRhythmSequence()
+        {
+            EventManager.Instance.Unsubscribe(EventManager.Events.DialogueEnded, StartRhythmSequence);
+            if (rhythmEngine != null)
+                rhythmEngine.StartRhythmSequence();
+        }
+    }
+}

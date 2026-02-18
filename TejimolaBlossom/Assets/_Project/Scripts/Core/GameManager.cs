@@ -175,31 +175,41 @@ namespace Tejimola.Core
         // Save data structure
         public SaveData GetSaveData()
         {
-            return new SaveData
+            var data = new SaveData
             {
-                currentAct = CurrentAct,
+                currentAct       = CurrentAct,
                 currentCharacter = CurrentCharacter,
-                currentDay = CurrentDay,
-                catchCount = CatchCount,
-                exhaustionLevel = ExhaustionLevel,
-                collectedItems = new List<string>(CollectedItems),
-                solvedPuzzles = new List<PuzzleType>(SolvedPuzzles),
-                storyFlags = new Dictionary<string, bool>(StoryFlags),
-                spiritOrbCount = SpiritOrbCount
+                currentDay       = CurrentDay,
+                catchCount       = CatchCount,
+                exhaustionLevel  = ExhaustionLevel,
+                collectedItems   = new List<string>(CollectedItems),
+                solvedPuzzles    = new List<PuzzleType>(SolvedPuzzles),
+                spiritOrbCount   = SpiritOrbCount
             };
+            // Serialize Dictionary as parallel lists (JsonUtility doesn't support Dictionary)
+            data.storyFlagKeys   = new List<string>(StoryFlags.Keys);
+            data.storyFlagValues = new List<bool>(StoryFlags.Values);
+            return data;
         }
 
         public void LoadSaveData(SaveData data)
         {
-            CurrentAct = data.currentAct;
+            CurrentAct       = data.currentAct;
             CurrentCharacter = data.currentCharacter;
-            CurrentDay = data.currentDay;
-            CatchCount = data.catchCount;
-            ExhaustionLevel = data.exhaustionLevel;
-            CollectedItems = new HashSet<string>(data.collectedItems);
-            SolvedPuzzles = new HashSet<PuzzleType>(data.solvedPuzzles);
-            StoryFlags = new Dictionary<string, bool>(data.storyFlags);
-            SpiritOrbCount = data.spiritOrbCount;
+            CurrentDay       = data.currentDay;
+            CatchCount       = data.catchCount;
+            ExhaustionLevel  = data.exhaustionLevel;
+            CollectedItems   = data.collectedItems  != null ? new HashSet<string>(data.collectedItems)    : new HashSet<string>();
+            SolvedPuzzles    = data.solvedPuzzles   != null ? new HashSet<PuzzleType>(data.solvedPuzzles) : new HashSet<PuzzleType>();
+            SpiritOrbCount   = data.spiritOrbCount;
+
+            // Rebuild Dictionary from parallel lists
+            StoryFlags = new Dictionary<string, bool>();
+            if (data.storyFlagKeys != null)
+            {
+                for (int i = 0; i < data.storyFlagKeys.Count && i < data.storyFlagValues.Count; i++)
+                    StoryFlags[data.storyFlagKeys[i]] = data.storyFlagValues[i];
+            }
         }
     }
 
@@ -211,9 +221,11 @@ namespace Tejimola.Core
         public int currentDay;
         public int catchCount;
         public float exhaustionLevel;
-        public List<string> collectedItems;
-        public List<PuzzleType> solvedPuzzles;
-        public Dictionary<string, bool> storyFlags;
+        public List<string> collectedItems   = new List<string>();
+        public List<PuzzleType> solvedPuzzles = new List<PuzzleType>();
+        // Dictionary serialized as parallel lists (JsonUtility does not support Dictionary)
+        public List<string> storyFlagKeys    = new List<string>();
+        public List<bool>   storyFlagValues  = new List<bool>();
         public int spiritOrbCount;
     }
 }
